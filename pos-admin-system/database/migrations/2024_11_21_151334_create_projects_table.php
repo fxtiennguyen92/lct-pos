@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('name')->unique();
 
             $table->tinyInteger('status')->default(0);
-            $table->foreignIdFor(User::class, 'created_by')->nullable();
-            $table->foreignIdFor(User::class, 'updated_by')->nullable();
             $table->timestamps();
         });
 

@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\User;
+use App\ProjectStatusEnum;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Enum;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        $user = User::findOrFail(Auth::id());
-        $projects = $user->projects()->paginate(10);
-        return view('projects.list', compact('projects'));
+        $projects = Project::paginate(10);
+        return view('projects.index', compact('projects'));
     }
 
     public function create()
@@ -24,11 +23,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:100|unique:projects'
         ]);
 
-        $project = Project::create($validated);
-        $project->users()->attach(Auth::id());
+        Project::create($validated);
 
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully.');
@@ -45,7 +43,8 @@ class ProjectController extends Controller
         // $this->authorize('update', $project);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:100|unique:projects,id,'.$project->id,
+            'status' => ['required', new Enum(ProjectStatusEnum::class)]
         ]);
 
         $project->update($validated);
