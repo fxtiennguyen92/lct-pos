@@ -19,10 +19,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $permission = [
-            'settings.accounts.create', 'settings.accounts.edit', 'settings.accounts.trash',
-            'settings.roles.create', 'settings.roles.edit', 'settings.roles.trash',
-            'settings.permission.create', 'settings.permission.edit', 'settings.permission.trash',
-            'settings.projects.create', 'settings.projects.edit', 'settings.projects.trash',
+            'settings.accounts.create', 'settings.accounts.edit', 'settings.accounts.trash', 'settings.roles.restore',
+            'settings.roles.create', 'settings.roles.edit', 'settings.roles.trash', 'settings.roles.restore',
+            'settings.projects.create', 'settings.projects.edit', 'settings.projects.trash', 'settings.projects.restore'
         ];
 
         foreach ($permission as $perm) {

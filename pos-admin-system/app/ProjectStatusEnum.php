@@ -2,11 +2,11 @@
 
 namespace App;
 
-enum ProjectStatusEnum: int
+enum ProjectStatusEnum: string
 {
-    case PENDING = 0;
-    case ACTIVE = 1;
-    case DISABLE = 2;
+    case PENDING = '0';
+    case ACTIVE = '1';
+    case DISABLE = '2';
 
     public function label()
     {

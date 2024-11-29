@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\RolesEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -76,5 +78,22 @@ class User extends Authenticatable implements Auditable
     public function projects()
     {
         return $this->belongsToMany(Project::class);
+    }
+
+    public static function getListByAdmin(bool $isSuper, string $search)
+    {
+        if ($isSuper) {
+            return User::withTrashed()
+                ->where('name', 'like', '%' . trim($search) . '%')
+                ->orWhere('email', 'like', '%' . trim($search) . '%')
+                ->paginate(20);
+        }
+
+        return User::withTrashed()
+            ->where('name', 'like', '%' . trim($search) . '%')
+            ->orWhere('email', 'like', '%' . trim($search) . '%')
+            ->withoutRole(RolesEnum::SUPER_ADMIN)
+            ->withoutRole(RolesEnum::ADMIN)
+            ->paginate(20);
     }
 }

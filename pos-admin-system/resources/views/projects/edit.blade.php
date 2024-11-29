@@ -26,9 +26,9 @@
                     <div class="mb-4">
                         <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status</label>
                         <select name="status" id="status"
-                            class="block w-2/4 border-gray-300 rounded-md shadow focus:outline-none focus:shadow-outline">
+                            class="block w-auto border-gray-300 rounded-md shadow focus:outline-none focus:shadow-outline">
                             @foreach (\App\ProjectStatusEnum::cases() as $status)
-                                <option value="{{ $status }}" @selected(old('status', $project->status) === $status)>
+                                <option value="{{ $status }}" @selected(old('status', $project->status) == $status->value)>
                                     {{ $status->label() }}
                                 </option>
                             @endforeach
