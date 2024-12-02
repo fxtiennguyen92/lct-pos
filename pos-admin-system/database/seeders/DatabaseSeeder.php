@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
+use App\Models\Tax;
 use App\Models\User;
 use App\PermissionsEnum;
 use App\RolesEnum;
@@ -19,9 +21,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $permission = [
-            'settings.accounts.create', 'settings.accounts.edit', 'settings.accounts.trash', 'settings.roles.restore',
+            'settings.accounts.create', 'settings.accounts.edit', 'settings.accounts.trash', 'settings.accounts.restore',
             'settings.roles.create', 'settings.roles.edit', 'settings.roles.trash', 'settings.roles.restore',
-            'settings.projects.create', 'settings.projects.edit', 'settings.projects.trash', 'settings.projects.restore'
+            'settings.projects.create', 'settings.projects.edit', 'settings.projects.trash', 'settings.projects.restore',
+            'settings.projects.taxes.create', 'settings.projects.taxes.edit', 'settings.projects.taxes.trash', 'settings.projects.taxes.restore'
         ];
 
         foreach ($permission as $perm) {
@@ -49,5 +52,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->assignRole(RolesEnum::SUPER_ADMIN);
+
+
+        // Demo Project
+        $project = Project::create(['name' => 'Demo']);
+        $taxes = [
+            ['title' => 'VAT10', 'percentage' => 10],
+            ['title' => 'VAT20', 'percentage' => 20]
+        ];
+        foreach ($taxes as $tax) {
+            Tax::create([
+                'title' => $tax['title'],
+                'percentage' => $tax['percentage'],
+                'project_id' => $project->id
+            ]);
+        }
+
     }
 }

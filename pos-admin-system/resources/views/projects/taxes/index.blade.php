@@ -1,9 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Projects') }}
-        </h2>
-    </x-slot>
+    @include('project-navigation-menu')
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,21 +10,20 @@
                 </div>
             @endif
 
-            @can('settings.project.create')
+            @can('settings.projects.taxes.create')
                 <div class="mb-6">
-                    <a href="{{ route('projects.create') }}"
+                    <a href="{{ route('projects.taxes.create', $project->id) }}"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        {{ __('Create new project') }}
+                        {{ __('Create new tax') }}
                     </a>
                 </div>
             @endcan
 
-            @if ($projects->count())
+            @if ($taxes->count())
                 @php
                     $statusColors = [
-                        \App\ProjectStatusEnum::PENDING->value => ' bg-yellow-600',
-                        \App\ProjectStatusEnum::ACTIVE->value => ' bg-blue-500',
-                        \App\ProjectStatusEnum::DISABLE->value => ' bg-gray-800',
+                        \App\StatusEnum::ACTIVE->value => ' border border-green-400 bg-green-100 text-green-700',
+                        \App\StatusEnum::DISABLE->value => ' bg-gray-600 text-white',
                     ];
                 @endphp
 
@@ -38,58 +33,62 @@
                             <tr>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Name</th>
+                                    Title</th>
+                                <th
+                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Percentage</th>
+                                <th
+                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Priority</th>
                                 <th
                                     class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Status</th>
-                                <th
-                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Accounts</th>
                                 <th
                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-sm">
-                            @foreach ($projects as $project)
+                            @foreach ($taxes as $tax)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $project->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $tax->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                                        {{ number_format($tax->percentage, 2) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">{{ $tax->priority }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        @if ($project->trashed())
+                                        @if ($tax->trashed())
                                             <span
                                                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white bg-red-600">
-                                                Trashed
+                                                Deleted
                                             </span>
                                         @else
                                             <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white {{ $statusColors[$project->status] }}">
-                                                {{ \App\ProjectStatusEnum::from($project->status)->label() }}
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusColors[$tax->status ?? 0] }}">
+                                                {{ \App\StatusEnum::from($tax->status)->label() }}
                                             </span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">{{ $project->users->count() }}
-                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        @if ($project->trashed())
-                                            @can('settings.project.restore')
+                                        @if ($tax->trashed())
+                                            @can('settings.projects.taxes.restore')
                                                 <form class="inline-block"
-                                                    action="{{ route('projects.restore', $project->id) }}" method="POST"
-                                                    onsubmit="return confirm('Are you sure?');">
+                                                    action="{{ route('projects.taxes.restore', [$project->id, $tax->id]) }}"
+                                                    method="POST" onsubmit="return confirm('Are you sure?');">
                                                     @csrf @method('put')
                                                     <button type="submit"
                                                         class="text-green-500 hover:text-green-700 mb-2 mr-2">Restore</button>
                                                 </form>
                                             @endcan
                                         @else
-                                            @can('settings.project.update')
-                                                <a href="{{ route('projects.edit', $project) }}"
+                                            @can('settings.projects.taxes.update')
+                                                <a href="{{ route('projects.taxes.edit', [$project->id, $tax->id]) }}"
                                                     class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
                                             @endcan
 
-                                            @can('settings.project.trash')
+                                            @can('settings.projects.taxes.trash')
                                                 <form class="inline-block"
-                                                    action="{{ route('projects.destroy', $project->id) }}" method="POST"
-                                                    onsubmit="return confirm('Are you sure?');">
+                                                    action="{{ route('projects.taxes.destroy', [$project->id, $tax->id]) }}"
+                                                    method="POST" onsubmit="return confirm('Are you sure?');">
                                                     @csrf @method('delete')
                                                     <button type="submit"
                                                         class="text-red-600 hover:text-red-900 mb-2 mr-2">Delete</button>
@@ -103,7 +102,7 @@
                     </table>
                 </div>
                 <div class="py-4">
-                    {{ $projects->links() }}
+                    {{ $taxes->links() }}
                 </div>
             @endif
         </div>

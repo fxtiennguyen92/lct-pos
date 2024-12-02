@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,9 +18,12 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    Route::resource('accounts', AccountController::class);
+    Route::put('/account/{id}/restore', [AccountController::class, 'restore'])->name('accounts.restore');
+
     Route::resource('projects', ProjectController::class);
     Route::put('/project/{id}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
 
-    Route::resource('accounts', AccountController::class);
-    Route::put('/account/{id}/restore', [AccountController::class, 'restore'])->name('accounts.restore');
+    Route::resource('projects.taxes', TaxController::class);
+    Route::put('/project/{projectId}/taxes/{id}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
 });

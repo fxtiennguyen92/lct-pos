@@ -15,7 +15,7 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $user = User::find(Auth::id());
-        $accounts = User::getListByAdmin($user->hasRole(RolesEnum::SUPER_ADMIN), $request->search);
+        $accounts = User::getListByAdmin($user->hasRole(RolesEnum::SUPER_ADMIN), $request->search ?? '');
         
         return view('accounts.index', compact('accounts'));
     }

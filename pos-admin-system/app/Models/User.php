@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\RolesEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -21,14 +22,14 @@ class User extends Authenticatable implements Auditable
 
     /** Permission */
     use HasRoles;
-
+    
     use HasApiTokens;
-
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -80,7 +81,7 @@ class User extends Authenticatable implements Auditable
         return $this->belongsToMany(Project::class);
     }
 
-    public static function getListByAdmin(bool $isSuper, string $search)
+    public static function getListByAdmin(bool $isSuper, string $search = '')
     {
         if ($isSuper) {
             return User::withTrashed()
