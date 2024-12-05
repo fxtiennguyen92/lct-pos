@@ -15,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
-        $projects = ($user->hasRole(RolesEnum::SUPER_ADMIN)) ? Project::withTrashed()->paginate(10) : Project::paginate(10);
+        $projects = $user->hasRole(RolesEnum::SUPER_ADMIN) ? Project::withTrashed()->paginate(10) : Project::paginate(10);
         return view('projects.index', compact('projects'));
     }
 
@@ -38,14 +38,11 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        // $this->authorize('update', $project);
         return view('projects.edit', compact('project'));
     }
 
     public function update(Request $request, Project $project)
     {
-        // $this->authorize('update', $project);
-
         $validated = $request->validate([
             'name' => 'required|string|max:100|unique:projects,name,' . $project->id,
             'status' => ['required', new Enum(ProjectStatusEnum::class)]
@@ -74,5 +71,10 @@ class ProjectController extends Controller
 
         return redirect()->route('projects.index')
             ->with('success', 'Project restored successfully.');
+    }
+
+    public function settings(Project $project)
+    {
+        return view('projects.settings', compact('projects'));
     }
 }

@@ -22,8 +22,8 @@
             @if ($taxes->count())
                 @php
                     $statusColors = [
-                        \App\StatusEnum::ACTIVE->value => ' border border-green-400 bg-green-100 text-green-700',
-                        \App\StatusEnum::DISABLE->value => ' bg-gray-600 text-white',
+                        \App\StatusEnum::ACTIVE->value => ' bg-green-400 text-white',
+                        \App\StatusEnum::DISABLE->value => ' bg-gray-500 text-white',
                     ];
                 @endphp
 
@@ -72,7 +72,7 @@
                                         @if ($tax->trashed())
                                             @can('settings.projects.taxes.restore')
                                                 <form class="inline-block"
-                                                    action="{{ route('projects.taxes.restore', [$project->id, $tax->id]) }}"
+                                                    action="{{ route('projects.taxes.restore', $tax->id) }}"
                                                     method="POST" onsubmit="return confirm('Are you sure?');">
                                                     @csrf @method('put')
                                                     <button type="submit"

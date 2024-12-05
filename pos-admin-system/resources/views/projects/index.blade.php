@@ -26,9 +26,9 @@
             @if ($projects->count())
                 @php
                     $statusColors = [
-                        \App\ProjectStatusEnum::PENDING->value => ' bg-yellow-600',
-                        \App\ProjectStatusEnum::ACTIVE->value => ' bg-blue-500',
-                        \App\ProjectStatusEnum::DISABLE->value => ' bg-gray-800',
+                        \App\ProjectStatusEnum::PENDING->value => ' bg-yellow-300',
+                        \App\ProjectStatusEnum::ACTIVE->value => ' bg-green-400',
+                        \App\ProjectStatusEnum::DISABLE->value => ' bg-gray-500',
                     ];
                 @endphp
 
