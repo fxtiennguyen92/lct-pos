@@ -82,6 +82,8 @@
                                             @endcan
                                         @else
                                             @can('settings.project.update')
+                                                <a href="{{ route('projects.settings', $project) }}"
+                                                    class="text-purple-800 hover:text-purple-900 mr-3">Settings</a>
                                                 <a href="{{ route('projects.edit', $project) }}"
                                                     class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
                                             @endcan

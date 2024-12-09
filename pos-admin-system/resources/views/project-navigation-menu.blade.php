@@ -13,11 +13,12 @@
             <div class="flex items-center">
                 <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                     <li>
-                        <x-project-nav-link href="{{ route('projects.taxes.index', $project->id) }}" :active="request()->routeIs('projects.taxes.*')">Taxes</x-project-nav-link>
+                        <x-project-nav-link href="{{ route('projects.settings', $project->id) }}" :active="request()->routeIs('projects.settings')">Settings</x-project-nav-link>
                     </li>
                     <li>
-                        <x-project-nav-link href="#">Information</x-project-nav-link>
+                        <x-project-nav-link href="{{ route('projects.taxes.index', $project->id) }}" :active="request()->routeIs('projects.taxes.*')">Taxes</x-project-nav-link>
                     </li>
+                    
                 </ul>
             </div>
         </div>

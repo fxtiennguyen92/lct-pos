@@ -10,10 +10,63 @@
                 </div>
             @endif
 
+            @can('settings.projects.taxes.update')
+                <div class="w-full bg-white border border-gray-200 rounded shadow mb-6">
+                    <div class="bg-gray-50 divide-x divide-gray-200 rounded p-4">
+                        <h5 class="text-left text-xs font-medium text-gray-500 uppercase">Tax Settings</h5>
+                    </div>
+                    <div class="border-t border-gray-200">
+                        <div class="bg-white rounded p-4">
+                            <form method="POST" action="{{ route('projects.taxes.settings', $project->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="m-4">
+                                    <label for="default_tax" class="block text-gray-700 text-sm font-bold mb-2">Default Tax
+                                        Rate</label>
+                                    <select name="default_tax" id="default_tax"
+                                        class="block w-full border-gray-300 rounded-md text-sm shadow focus:outline-none focus:shadow-outline">
+                                        <option value="">{{ __('No tax') }}</option>
+                                        @foreach ($taxes as $tax)
+                                            <option
+                                                value="{{ $tax->status === \App\StatusEnum::ACTIVE->value ? $tax->id : '' }}"
+                                                @selected(old('default_tax', $defaultTax) == $tax->id)
+                                                {{ $tax->status !== \App\StatusEnum::ACTIVE->value ? 'disabled' : '' }}>
+                                                {{ $tax->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('default_tax')
+                                        <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <label class="m-4 inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer" name="display_price_with_tax" value="1"
+                                        @checked(old('display_price_with_tax', $displayPriceWithTax) == '1') />
+                                    <div
+                                        class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                    </div>
+                                    <span class="ms-3 text-md text-gray-900">Display product
+                                        price including taxes</span>
+                                </label>
+
+                                <div class="m-4">
+                                    <button type="submit"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Save settings
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+
             @can('settings.projects.taxes.create')
-                <div class="mb-6">
+                <div class="mb-6 flow-root">
+                    <h1 class="flex-left mt-10 mb-6 font-semibold text-2xl text-gray-800 leading-tight">Tax Management</h1>
                     <a href="{{ route('projects.taxes.create', $project->id) }}"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        class="flex-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         {{ __('Create new tax') }}
                     </a>
                 </div>
@@ -27,7 +80,7 @@
                     ];
                 @endphp
 
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="bg-white border border-gray-200 overflow-hidden shadow-xl rounded">
                     <table class="shadow min-w-full divide-y divide-gray-200 ">
                         <thead class="bg-gray-200">
                             <tr>
@@ -51,9 +104,16 @@
                         <tbody class="bg-white divide-y divide-gray-200 text-sm">
                             @foreach ($taxes as $tax)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $tax->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $tax->title }}
+                                        @if ($defaultTax == $tax->id)
+                                            <span
+                                                class="ms-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white bg-indigo-500">
+                                                Default
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right">
-                                        {{ number_format($tax->percentage, 2) }}</td>
+                                        {{ number_format($tax->percentage, 2) . ' %' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">{{ $tax->priority }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                         @if ($tax->trashed())
@@ -72,8 +132,8 @@
                                         @if ($tax->trashed())
                                             @can('settings.projects.taxes.restore')
                                                 <form class="inline-block"
-                                                    action="{{ route('projects.taxes.restore', $tax->id) }}"
-                                                    method="POST" onsubmit="return confirm('Are you sure?');">
+                                                    action="{{ route('projects.taxes.restore', $tax->id) }}" method="POST"
+                                                    onsubmit="return confirm('Are you sure?');">
                                                     @csrf @method('put')
                                                     <button type="submit"
                                                         class="text-green-500 hover:text-green-700 mb-2 mr-2">Restore</button>

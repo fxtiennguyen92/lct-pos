@@ -12,11 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('product_sets', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Project::class);
-            $table->string('key', 200)->unique();
-            $table->text('value')->nullable();
+            $table->string('title');
+            $table->string('slug')->nullable();
+            $table->tinyInteger('priority')->default(1);
+            $table->tinyInteger('status')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('product_sets');
     }
 };

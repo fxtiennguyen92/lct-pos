@@ -12,11 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('product_options', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Project::class);
-            $table->string('key', 200)->unique();
-            $table->text('value')->nullable();
+            $table->string('name');
+            $table->string('option_type');
+            $table->boolean('required')->default(false);
+            $table->integer('priority')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('product_options');
     }
 };

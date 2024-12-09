@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Setting;
 use App\Models\Tax;
 use App\Models\User;
 use App\RolesEnum;
+use App\SettingsEnum;
 use App\StatusEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +25,10 @@ class TaxController extends Controller
             ? $project->taxes()->withTrashed()->orderBy('priority')->paginate(10)
             : $project->taxes()->orderBy('priority')->paginate(10);
 
-        return view('projects.taxes.index', compact('project', 'taxes'));
+        $defaultTax = Setting::getValueByKey(SettingsEnum::EC_TAX_DEFAULT->value, $project->id);
+        $displayPriceWithTax = Setting::getValueByKey(SettingsEnum::EC_PRICE_INCLUDING_TAX->value, $project->id);
+
+        return view('projects.taxes.index', compact('project', 'taxes', 'defaultTax', 'displayPriceWithTax'));
     }
 
     /**
@@ -90,6 +95,14 @@ class TaxController extends Controller
 
         $tax->update($validated);
 
+        // remove if is default tax
+        if (
+            $tax->status !== StatusEnum::ACTIVE->value
+            && $tax->id == Setting::getValueByKey(SettingsEnum::EC_TAX_DEFAULT->value, $project->id)
+        ) {
+            Setting::storeValue(SettingsEnum::EC_TAX_DEFAULT->value, '', $project->id);
+        }
+
         return redirect()->back()
             ->with('success', 'Tax updated successfully.');
     }
@@ -99,7 +112,14 @@ class TaxController extends Controller
      */
     public function destroy(Project $project, Tax $tax)
     {
+        $tax->status = StatusEnum::DISABLE;
+        $tax->save();
         $tax->delete();
+
+        // remove if is default tax
+        if ($tax->id == Setting::getValueByKey(SettingsEnum::EC_TAX_DEFAULT->value, $project->id)) {
+            Setting::storeValue(SettingsEnum::EC_TAX_DEFAULT->value, '', $project->id);
+        }
 
         return redirect()->route('projects.taxes.index', $project->id)
             ->with('success', 'Tax deleted successfully.');
@@ -109,10 +129,23 @@ class TaxController extends Controller
     {
         $tax = Tax::onlyTrashed()->findOrFail($id);
         $tax->restore();
-        $tax->status = StatusEnum::DISABLE;
-        $tax->save();
+        
 
         return redirect()->route('projects.taxes.index', $tax->project_id)
             ->with('success', 'Tax restored successfully.');
+    }
+
+    public function settings(Request $request, string $id)
+    {
+        $request->validate([
+            'default_tax' => 'nullable|exists:taxes,id',
+            'display_price_with_tax' => 'nullable|boolean',
+        ]);
+
+        Setting::storeValue(SettingsEnum::EC_TAX_DEFAULT->value, $request->has('default_tax') ? $request->get('default_tax') : '', $id);
+        Setting::storeValue(SettingsEnum::EC_PRICE_INCLUDING_TAX->value, $request->has('display_price_with_tax') ? '1' : '', $id);
+
+        return redirect()->back()
+            ->with('success', 'Tax settings updated successfully.');
     }
 }

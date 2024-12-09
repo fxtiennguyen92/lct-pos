@@ -73,8 +73,10 @@ class ProjectController extends Controller
             ->with('success', 'Project restored successfully.');
     }
 
-    public function settings(Project $project)
+    public function settings(string $id)
     {
-        return view('projects.settings', compact('projects'));
+        $project = Project::findOrFail($id);
+
+        return view('projects.settings', compact('project'));
     }
 }

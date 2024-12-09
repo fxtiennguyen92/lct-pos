@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\StatusEnum;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Model;
@@ -27,4 +28,5 @@ class Tax extends Model  implements Auditable
     {
         return $this->belongsTo(Project::class);
     }
+
 }
