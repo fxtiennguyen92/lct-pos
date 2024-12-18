@@ -10,12 +10,27 @@
                 <div class="border-t border-gray-200">
                     <div class="bg-white rounded-lg">
                         <dl
-                            class="grid max-w-screen-xl gap-4 p-4 mx-auto text-gray-900 grid-cols-4 sm:grid-cols-2">
+                            class="grid max-w-screen-xl gap-4 p-4 mx-auto text-gray-900 grid-cols-3">
                             
+                            {{-- Taxes --}}
                             <div class="flex flex-col justify-center">
                                 <a href="{{ route('projects.taxes.index', $project->id) }}"
                                     class="text-md font-bold text-blue-500 focus:outline-none">Taxes</a>
                                 <dd class="text-sm text-gray-500">Modify your taxes settings</dd>
+                            </div>
+
+                            {{-- Product Categories --}}
+                            <div class="flex flex-col justify-center">
+                                <a href="{{ route('projects.product-categories.index', $project->id) }}"
+                                    class="text-md font-bold text-blue-500 focus:outline-none">Product Categories</a>
+                                <dd class="text-sm text-gray-500">Modify your product categories</dd>
+                            </div>
+
+                            {{-- Product Attributes --}}
+                            <div class="flex flex-col justify-center">
+                                <a href="{{ route('projects.product-attribute-sets.index', $project->id) }}"
+                                    class="text-md font-bold text-blue-500 focus:outline-none">Product Attributes</a>
+                                <dd class="text-sm text-gray-500">Modify your product attributes</dd>
                             </div>
                         </dl>
                     </div>

@@ -62,15 +62,17 @@
                 </div>
             @endcan
 
-            @can('settings.projects.taxes.create')
-                <div class="mb-6 flow-root">
-                    <h1 class="flex-left mt-10 mb-6 font-semibold text-2xl text-gray-800 leading-tight">Tax Management</h1>
+
+            <div class="mb-4 mt-10 flex items-center justify-between">
+                <h1 class="flex-left font-semibold text-xl text-gray-800 leading-tight">Tax Management</h1>
+
+                @can('settings.projects.taxes.create')
                     <a href="{{ route('projects.taxes.create', $project->id) }}"
                         class="flex-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         {{ __('Create new tax') }}
                     </a>
-                </div>
-            @endcan
+                @endcan
+            </div>
 
             @if ($taxes->count())
                 @php

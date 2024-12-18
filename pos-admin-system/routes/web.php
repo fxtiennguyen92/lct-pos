@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\ProductSetController;
+use App\Http\Controllers\ProductAttributeController;
+use App\Http\Controllers\ProductAttributeSetController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,8 @@ Route::middleware([
     Route::put('/tax/{id}/restore', [TaxController::class, 'restore'])->name('projects.taxes.restore');
     Route::put('/project/{id}/settings/taxes', [TaxController::class, 'settings'])->name('projects.taxes.settings');
 
-
-    Route::resource('projects.product-sets', ProductSetController::class)->except('show');
+    Route::resource('projects.product-attribute-sets', ProductAttributeSetController::class)->except('show');
+    Route::resource('projects.product-attribute-sets.product-attributes', ProductAttributeController::class)->except('show');
     
+    Route::resource('projects.product-categories', ProductCategoryController::class)->except('show');
 });

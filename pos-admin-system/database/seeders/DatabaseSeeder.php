@@ -27,6 +27,15 @@ class DatabaseSeeder extends Seeder
             'settings.projects.taxes.create', 'settings.projects.taxes.edit', 'settings.projects.taxes.trash', 'settings.projects.taxes.restore'
         ];
 
+        $parts = [
+            'settings.accounts',
+            'settings.roles',
+            'settings.projects',
+            'settings.projects.taxes',
+            'settings.projects.product-attributes',
+            'settings.projects.product-categories',
+        ];
+
         foreach ($permission as $perm) {
             Permission::create(['name' => $perm]);
         }

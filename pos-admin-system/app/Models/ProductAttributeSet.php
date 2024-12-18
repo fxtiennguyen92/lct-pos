@@ -6,8 +6,9 @@ use App\StatusEnum;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class Tax extends Model implements Auditable
+class ProductAttributeSet extends Model implements Auditable
 {
     /** Auditable */
     use \OwenIt\Auditing\Auditable;
@@ -18,18 +19,21 @@ class Tax extends Model implements Auditable
     {
         parent::boot();
 
-        static::deleting(function ($tax) {
-            $tax->status = StatusEnum::DISABLE;
+        static::creating(function ($set) {
+            $set->slug = Str::slug($set->title);
+        });
+
+        static::updating(function ($set) {
+            $set->slug = Str::slug($set->title);
         });
     }
 
-    protected $fillable = ['title', 'percentage', 'priority', 'status', 'description'];
+    protected $fillable = ['title', 'slug', 'priority', 'status'];
 
     protected function casts(): array
     {
         return [
             'priority' => 'integer',
-            'percentage' => 'double',
         ];
     }
 
@@ -38,4 +42,8 @@ class Tax extends Model implements Auditable
         return $this->belongsTo(Project::class);
     }
 
+    public function productAttributes()
+    {
+        return $this->hasMany(ProductAttribute::class)->orderBy('priority')->orderBy('default_flg', 'desc');
+    }
 }

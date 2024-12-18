@@ -32,14 +32,31 @@ class Project extends Model implements Auditable
         return $this->belongsToMany(User::class);
     }
 
-    public function taxes() {
-        return $this->hasMany(Tax::class);
+    public function taxes()
+    {
+        return $this->hasMany(Tax::class)->orderBy('priority');
+    }
+
+    public function productAttributeSets()
+    {
+        return $this->hasMany(ProductAttributeSet::class)->orderBy('priority');
+    }
+
+    public function productCategories()
+    {
+        return $this->hasMany(ProductCategory::class)->parent()->with('children')->orderBy('priority');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(ProductCategory::class)->orderBy('parent_id')->orderBy('priority');
     }
 
     /**
      * Find with token
-    */
-    public static function findByToken(string $token, bool $withTrashed = false) {
+     */
+    public static function findByToken(string $token, bool $withTrashed = false)
+    {
         if ($withTrashed) {
             return Project::withTrashed()->where('token', $token)->first();
         }

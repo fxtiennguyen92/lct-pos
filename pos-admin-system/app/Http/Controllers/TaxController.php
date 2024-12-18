@@ -50,8 +50,7 @@ class TaxController extends Controller
                 'string',
                 'max:150',
                 Rule::unique('taxes')->where(
-                    fn($q) =>
-                    $q->where('project_id', $project->id)
+                    fn($q) => $q->where('project_id', $project->id)
                 )
             ],
             'percentage' => 'required|decimal:0,2|gte:0|lt:100,',
@@ -112,8 +111,6 @@ class TaxController extends Controller
      */
     public function destroy(Project $project, Tax $tax)
     {
-        $tax->status = StatusEnum::DISABLE;
-        $tax->save();
         $tax->delete();
 
         // remove if is default tax
@@ -129,7 +126,7 @@ class TaxController extends Controller
     {
         $tax = Tax::onlyTrashed()->findOrFail($id);
         $tax->restore();
-        
+
 
         return redirect()->route('projects.taxes.index', $tax->project_id)
             ->with('success', 'Tax restored successfully.');
