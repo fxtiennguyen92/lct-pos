@@ -52,8 +52,8 @@
 
                                 <div class="m-4">
                                     <button type="submit"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Save settings
+                                        class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Save Settings
                                     </button>
                                 </div>
                             </form>
@@ -63,13 +63,14 @@
             @endcan
 
 
+            {{-- Tax List --}}
             <div class="mb-4 mt-10 flex items-center justify-between">
                 <h1 class="flex-left font-semibold text-xl text-gray-800 leading-tight">Tax Management</h1>
 
                 @can('settings.projects.taxes.create')
                     <a href="{{ route('projects.taxes.create', $project->id) }}"
-                        class="flex-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        {{ __('Create new tax') }}
+                        class="flex-right bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        {{ __('Create New Tax') }}
                     </a>
                 @endcan
             </div>

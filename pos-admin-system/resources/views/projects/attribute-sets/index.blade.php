@@ -14,7 +14,7 @@
                 <div class="mb-6">
                     <a href="{{ route('projects.product-attribute-sets.create', $project) }}"
                         class="flex-right bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        {{ __('Create New Attribute') }}
+                        {{ __('Create New Attribute Set') }}
                     </a>
                 </div>
             @endcan
