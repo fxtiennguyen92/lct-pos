@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\ProductAttributeSetController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,8 @@ Route::middleware([
     Route::resource('projects.product-attribute-sets.product-attributes', ProductAttributeController::class)->except('show');
     
     Route::resource('projects.product-categories', ProductCategoryController::class)->except('show');
+
+    // TODO: Product Option
+
+    Route::resource('projects.products', ProductController::class)->except('show');
 });

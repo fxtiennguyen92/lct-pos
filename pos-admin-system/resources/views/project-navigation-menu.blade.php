@@ -16,13 +16,16 @@
                         <x-project-nav-link href="{{ route('projects.settings', $project->id) }}" :active="request()->routeIs('projects.settings')">Settings</x-project-nav-link>
                     </li>
                     <li>
-                        <x-project-nav-link href="{{ route('projects.taxes.index', $project->id) }}" :active="request()->routeIs('projects.taxes.*')">Taxes</x-project-nav-link>
+                        <x-project-nav-link href="{{ route('projects.products.index', $project->id) }}" :active="request()->routeIs('projects.products.*')">Products</x-project-nav-link>
                     </li>
                     <li>
                         <x-project-nav-link href="{{ route('projects.product-attribute-sets.index', $project->id) }}" :active="request()->routeIs('projects.product-attribute-sets.*')">Attributes</x-project-nav-link>
                     </li>
                     <li>
                         <x-project-nav-link href="{{ route('projects.product-categories.index', $project->id) }}" :active="request()->routeIs('projects.product-categories.*')">Categories</x-project-nav-link>
+                    </li>
+                    <li>
+                        <x-project-nav-link href="{{ route('projects.taxes.index', $project->id) }}" :active="request()->routeIs('projects.taxes.*')">Taxes</x-project-nav-link>
                     </li>
                 </ul>
             </div>

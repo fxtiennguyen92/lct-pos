@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\StatusEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,11 @@ class Tax extends Model implements Auditable
             'priority' => 'integer',
             'percentage' => 'double',
         ];
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', StatusEnum::ACTIVE);
     }
 
     public function project()

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductCategory extends Model implements Auditable
 {
@@ -24,19 +26,29 @@ class ProductCategory extends Model implements Auditable
         ];
     }
 
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', StatusEnum::ACTIVE);
+    }
+
     public function scopeParent(Builder $query): void
     {
         $query->whereNull('parent_id');
     }
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(ProductCategory::class, 'parent_id', 'id')->orderBy('priority');
     }
 
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_category_product');
+    }
+
     public function recursiveDelete()
     {
-        // Delete all children first
+        // Delete all children
         foreach ($this->children as $child) {
             $child->recursiveDelete();
         }

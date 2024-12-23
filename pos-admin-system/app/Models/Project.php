@@ -52,6 +52,11 @@ class Project extends Model implements Auditable
         return $this->hasMany(ProductCategory::class)->orderBy('parent_id')->orderBy('priority');
     }
 
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class, ProductCategory::class);
+    }
+
     /**
      * Find with token
      */
