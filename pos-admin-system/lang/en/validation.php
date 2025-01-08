@@ -189,6 +189,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'product_category' => 'category',
+        'product_attribute' => 'attribute',
+    ],
 
 ];

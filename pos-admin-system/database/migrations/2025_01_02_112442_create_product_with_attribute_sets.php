@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\Project;
+use App\Models\Product;
+use App\Models\ProductAttributeSet;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_sets', function (Blueprint $table) {
+        Schema::create('product_with_attribute_sets', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
-            $table->string('title');
-            $table->string('slug')->nullable();
-            $table->tinyInteger('priority')->default(1);
-            $table->tinyInteger('status')->default(0);
-            $table->softDeletes();
+            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(ProductAttributeSet::class);
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_sets');
+        Schema::dropIfExists('product_with_attribute_sets');
     }
 };

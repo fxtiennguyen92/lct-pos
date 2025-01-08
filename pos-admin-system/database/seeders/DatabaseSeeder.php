@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'guard_name' => 'api',
         ]);
         $admin = Role::create(['name' => RolesEnum::ADMIN]);
+
         Role::create(['name' => RolesEnum::CUSTOMER_SERVICE]);
         Role::create(['name' => RolesEnum::PROJECT_MANAGER]);
         Role::create(['name' => RolesEnum::STAFF]);
@@ -59,23 +60,33 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password@123'),
         ]);
-
         $user->assignRole(RolesEnum::SUPER_ADMIN);
-
 
         // Demo Project
         $project = Project::create(['name' => 'Demo']);
         $taxes = [
-            ['title' => 'VAT10', 'percentage' => 10],
-            ['title' => 'VAT20', 'percentage' => 20]
+            ['title' => 'VAT10', 'percentage' => 10, 'status' => 1],
+            ['title' => 'VAT20', 'percentage' => 20, 'status' => 1]
         ];
         foreach ($taxes as $tax) {
-            Tax::create([
-                'title' => $tax['title'],
-                'percentage' => $tax['percentage'],
-                'project_id' => $project->id
-            ]);
+            $project->taxes()->create($tax);
         }
 
+        $project->categories()->create([
+            'name' => 'Menu',
+            'status' => 1
+        ]);
+        $attributeSet = $project->productAttributeSets()->create([
+            'title' => 'Size',
+            'status' => 1
+        ]);
+
+        $attributes = [
+            ['title' => 'S'], ['title' => 'M'], ['title' => 'L']
+        ];
+        foreach ($attributes as $attribute) {
+            $attributeSet->productAttributes()->create($attribute);
+        }
+        
     }
 }

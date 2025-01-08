@@ -54,7 +54,12 @@ class Project extends Model implements Auditable
 
     public function products()
     {
-        return $this->hasManyThrough(Product::class, ProductCategory::class);
+        return $this->hasManyThrough(Product::class, ProductCategory::class,
+            'project_id', // Foreign key on the categories table
+            'id',         // Foreign key on the pivot table
+            'id',         // Local key on the projects table
+            'id'          // Local key on the categories table
+        );
     }
 
     /**

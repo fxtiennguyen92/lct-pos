@@ -56,4 +56,11 @@ class ProductCategory extends Model implements Auditable
         // Delete the current category
         $this->delete();
     }
+
+    public static function getCategoryWithProject($id, $projectId)
+    {
+        return ProductCategory::where('id', $id)
+            ->where('project_id', $projectId)
+            ->first();
+    }
 }

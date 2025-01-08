@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Tax;
 use App\Models\User;
@@ -16,10 +17,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignIdFor(ProductCategory::class);
-            $table->foreignIdFor(Tax::class)->nullable();
-
+            
             $table->string('code', 30)->nullable();
             $table->string('sku', 200)->nullable();
             
@@ -38,6 +36,9 @@ return new class extends Migration
             $table->double('cost_per_item')->nullable();
             
             $table->boolean('variation_flg')->default(false);
+            $table->boolean('variation_default_flg')->default(false);
+            $table->foreignIdFor(Product::class, 'parent_product_id')->nullable();
+
             $table->integer('priority')->default(1);
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('stock_status')->default(0);
