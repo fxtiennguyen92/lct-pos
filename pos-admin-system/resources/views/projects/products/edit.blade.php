@@ -10,7 +10,8 @@
                     <div class="w-3/4">
                         <div class="bg-white border border-gray-200 rounded shadow">
                             <div class="bg-gray-50 divide-x divide-gray-200 rounded p-4">
-                                <h5 class="text-left text-xs text-gray-500 uppercase">Edit Product</h5>
+                                <h5 class="text-left text-xs text-gray-500 uppercase">
+                                    {{ __('Edit Product') . ($product->variation_flg ? __(' - Variation') : '') }}</h5>
                             </div>
                             <div class="border-t border-gray-200">
                                 <div class="bg-white rounded p-4">
@@ -18,12 +19,19 @@
                                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
                                             Name <small class="text-red-500" title="{{ __('Required') }}">*</small>
                                         </label>
-                                        <input type="text" name="name" id="name"
-                                            class="border-gray-200 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            maxlength="150" value="{{ old('name', $product->name) }}" required>
-                                        @error('name')
-                                            <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
-                                        @enderror
+                                        @if ($product->variation_flg)
+                                            <input type="text" id="name"
+                                                class="border-gray-200 bg-gray-200 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+                                                value="{{ old('name', $product->name) }}" disabled>
+                                            <input type="hidden" name="name" value="{{ $product->name }}" />
+                                        @else
+                                            <input type="text" name="name" id="name"
+                                                class="border-gray-200 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                maxlength="150" value="{{ old('name', $product->name) }}" required>
+                                            @error('name')
+                                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                            @enderror
+                                        @endif
                                     </div>
 
                                     <div class="mb-4 gap-4 flex">
@@ -208,7 +216,7 @@
                                                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                             @can('settings.projects.products.update')
                                                                 <a href="{{ route('projects.products.edit', [$project, $variation->id]) }}"
-                                                                    class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                                                    class="text-indigo-600 hover:text-indigo-900 mr-3">{{ __('Edit') }}</a>
                                                             @endcan
 
                                                             @can('settings.projects.products.trash')
@@ -218,7 +226,7 @@
                                                                     onsubmit="return confirm('Are you sure?');">
                                                                     @csrf @method('delete')
                                                                     <button type="submit"
-                                                                        class="text-red-600 hover:text-red-900 mb-2 mr-2">Delete</button>
+                                                                        class="text-red-600 hover:text-red-900 mb-2 mr-2">{{ __('Delete') }}</button>
                                                                 </form>
                                                             @endcan
                                                         </td>
@@ -255,54 +263,57 @@
                         </div>
 
                         {{-- Categories --}}
-                        <div class="bg-white border border-gray-200 rounded shadow mb-6">
-                            <div class="bg-gray-50 divide-x divide-gray-200 rounded p-4">
-                                <h5 class="text-left text-xs text-gray-500 uppercase">
-                                    Categories</h5>
-                            </div>
-                            <div class="border-t border-gray-200 bg-white rounded">
-                                @error('categories')
-                                    <p class="px-4 mt-4 text-red-500 text-xs italic">
-                                        {{ $message }}</p>
-                                @enderror
-                                <div class="p-4 max-h-72 overflow-y-auto">
-                                    @foreach ($project->productCategories()->active()->get() as $category)
-                                        <div class="flex items-center mb-4">
-                                            <input id="default-checkbox-{{ $category->id }}" name="categories[]"
-                                                type="checkbox" value="{{ $category->id }}"
-                                                @checked(in_array($category->id, old('categories', $product->categorieIds())))
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 rounded focus:ring-blue-500 focus:ring-2">
-                                            <label for="default-checkbox-{{ $category->id }}"
-                                                class="ms-2 text-md text-gray-700">{{ $category->name }}</label>
-                                        </div>
-
-                                        @foreach ($category->children()->active()->get() as $child1)
-                                            <div class="flex items-center mb-4 ps-4">
-                                                <input id="default-checkbox-{{ $child1->id }}" name="categories[]"
-                                                    type="checkbox" value="{{ $child1->id }}"
-                                                    @checked(in_array($child1->id, old('categories', $product->categorieIds())))
+                        @if (!$product->variation_flg)
+                            <div class="bg-white border border-gray-200 rounded shadow mb-6">
+                                <div class="bg-gray-50 divide-x divide-gray-200 rounded p-4">
+                                    <h5 class="text-left text-xs text-gray-500 uppercase">
+                                        Categories</h5>
+                                </div>
+                                <div class="border-t border-gray-200 bg-white rounded">
+                                    @error('categories')
+                                        <p class="px-4 mt-4 text-red-500 text-xs italic">
+                                            {{ $message }}</p>
+                                    @enderror
+                                    <div class="p-4 max-h-72 overflow-y-auto">
+                                        @foreach ($project->productCategories()->active()->get() as $category)
+                                            <div class="flex items-center mb-4">
+                                                <input id="default-checkbox-{{ $category->id }}" name="categories[]"
+                                                    type="checkbox" value="{{ $category->id }}"
+                                                    @checked(in_array($category->id, old('categories', $product->categorieIds())))
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 rounded focus:ring-blue-500 focus:ring-2">
-                                                <label for="default-checkbox-{{ $child1->id }}"
-                                                    class="ms-2 text-md text-gray-700">{{ $child1->name }}</label>
+                                                <label for="default-checkbox-{{ $category->id }}"
+                                                    class="ms-2 text-md text-gray-700">{{ $category->name }}</label>
                                             </div>
 
-                                            @foreach ($child1->children()->active()->get() as $child2)
-                                                <div class="ms-4">
-                                                    <div class="flex items-center mb-4 ps-4">
-                                                        <input id="default-checkbox-{{ $child2->id }}"
-                                                            name="categories[]" type="checkbox"
-                                                            value="{{ $child2->id }}" @checked(in_array($child2->id, old('categories', $product->categorieIds())))
-                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 rounded focus:ring-blue-500 focus:ring-2">
-                                                        <label for="default-checkbox-{{ $child2->id }}"
-                                                            class="ms-2 text-md text-gray-700">{{ $child2->name }}</label>
-                                                    </div>
+                                            @foreach ($category->children()->active()->get() as $child1)
+                                                <div class="flex items-center mb-4 ps-4">
+                                                    <input id="default-checkbox-{{ $child1->id }}"
+                                                        name="categories[]" type="checkbox"
+                                                        value="{{ $child1->id }}" @checked(in_array($child1->id, old('categories', $product->categorieIds())))
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 rounded focus:ring-blue-500 focus:ring-2">
+                                                    <label for="default-checkbox-{{ $child1->id }}"
+                                                        class="ms-2 text-md text-gray-700">{{ $child1->name }}</label>
                                                 </div>
+
+                                                @foreach ($child1->children()->active()->get() as $child2)
+                                                    <div class="ms-4">
+                                                        <div class="flex items-center mb-4 ps-4">
+                                                            <input id="default-checkbox-{{ $child2->id }}"
+                                                                name="categories[]" type="checkbox"
+                                                                value="{{ $child2->id }}"
+                                                                @checked(in_array($child2->id, old('categories', $product->categorieIds())))
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-200 rounded focus:ring-blue-500 focus:ring-2">
+                                                            <label for="default-checkbox-{{ $child2->id }}"
+                                                                class="ms-2 text-md text-gray-700">{{ $child2->name }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             @endforeach
                                         @endforeach
-                                    @endforeach
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         {{-- Status --}}
                         <div class="bg-white border border-gray-200 rounded shadow mb-6">
@@ -312,15 +323,26 @@
                             </div>
                             <div class="border-t border-gray-200">
                                 <div class="bg-white rounded p-4">
+                                    @if ($product->variation_flg)
+                                        <label class="mb-4 inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer" name="variation_default_flg"
+                                                value="1" @checked(old('variation_default_flg', $product->variation_default_flg) == '1') />
+                                            <div
+                                                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                            </div>
+                                            <span
+                                                class="ms-3 text-md text-gray-900">{{ __('Default variation') }}</span>
+                                        </label>
+                                    @endif
+
                                     <select name="status" id="status"
-                                        class="block w-full border border-gray-300 rounded shadow text-sm focus:outline-none focus:shadow-outline">
+                                        class="block mt-4 w-full border border-gray-300 rounded shadow text-sm focus:outline-none focus:shadow-outline">
                                         @foreach (\App\StatusEnum::cases() as $status)
                                             <option value="{{ $status }}" @selected(old('status', $product->status) == $status->value)>
                                                 {{ $status->label() }}
                                             </option>
                                         @endforeach
                                     </select>
-
                                     @error('status')
                                         <p class="text-red-500 text-xs italic mt-2">
                                             {{ $message }}</p>

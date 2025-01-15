@@ -106,9 +106,11 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap mx-auto">
-                                        @foreach ($product->categories as $category)
-                                            <span class="me-2">{{ $category->name }}</span>
-                                        @endforeach
+                                        <span>
+                                            @foreach ($product->categories as $category)
+                                                {{ ($loop->first ? '' : ', ') . $category->name }}
+                                            @endforeach
+                                        </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right">
                                         @if ($product->getPrice() > 0)
