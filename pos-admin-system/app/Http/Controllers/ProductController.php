@@ -37,8 +37,6 @@ class ProductController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        dd($request->menus);
-
         $request->validate([
             'name' => 'required|string|max:150',
             'description' => 'nullable|max:1000',
@@ -130,7 +128,7 @@ class ProductController extends Controller
             'sale_price' => 'nullable|decimal:0,2|gte:0|lte:price',
             'image' => 'nullable|image|max:5120',
             'status' => 'required|boolean',
-            'categories' => 'required|array',
+            'categories' => 'required_if:variation_flg,null|array',
             'categories.*' => 'required|string|exists:product_categories,id',
             'variations' => 'nullable|array',
             'variations.*' => 'required|string|exists:product_attributes,id',

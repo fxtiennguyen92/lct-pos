@@ -3,7 +3,7 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
-            <form action="{{ route('projects.products.edit', [$project, $product]) }}" method="POST"
+            <form action="{{ route('projects.products.update', [$project, $product]) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf @method('put')
                 <div class="flex gap-4 mb-4">
