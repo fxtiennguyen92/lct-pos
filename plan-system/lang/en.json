@@ -1,0 +1,9 @@
+{
+    "roles": {
+        "super-admin": "Super Admin",
+        "admin": "Admin",
+        "project-manager": "Manager",
+        "staff": "Staff",
+        "client": "Client"
+    }
+}

@@ -11,13 +11,13 @@
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
                         <b>
                             <!-- Dark Logo icon -->
-                            <img src="logo.png" alt="Admin Page" class="dark-logo" style="height: 40px" />
+                            {{-- <img src="logo_white.png" alt="{{ config('app.name') }}" class="dark-logo"/> --}}
                             <!-- Light Logo icon -->
-                            <img src="logo.png" alt="Admin Page" class="light-logo" style="height: 40px" />
+                            <img src="logo-light-icon.png" alt="{{ config('app.name') }}" class="light-logo" />
                         </b>
-                        <span class="text-dark">
-                            Trang Quản Trị
-                            {{-- <!-- Logo text -->
+                        <span>
+                            <b>{{ config('app.name') }}</b>Admin
+                        {{-- <!-- Logo text -->
                             <img src="images/web/LogoTextColorV2.png" alt="Admin Page" class="dark-logo" style="height: 40px" />
                             <!-- Light Logo text -->
                             <img src="images/web/LogoTextColorV2.png" alt="Admin Page" class="light-logo" style="height: 40px" /> --}}
@@ -34,11 +34,16 @@
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- User Profile-->
-                @include('template.components.user-profile')
-
                 <!-- Sidebar navigation-->
-                @include('template.components.sidebar')
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        @include('template.components.user-profile')
+
+                        <!-- Sidebar navigation-->
+                        @include('template.components.sidebar')
+                    </ul>
+                </nav>
             </div>
         </aside>
 
@@ -56,32 +61,10 @@
 @endpush
 
 @prepend('css')
-    <link href="assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <link href="assets/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="assets/node_modules/dropify/dist/css/dropify.min.css" rel="stylesheet">
-    <link href="assets/node_modules/gridstack/gridstack.css" rel="stylesheet">
-    <link href="dist/css/pages/ribbon-page.css" rel="stylesheet">
-    <link href="dist/css/pages/other-pages.css" rel="stylesheet">
-    <script>
-        function addDefaultImage(img) {
-            img.src = "images/default/bg_image.png"
-        }
-    </script>
+    
 @endprepend
 
 @prepend('js')
-    <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
-    <script src="dist/js/waves.js"></script>
-    <script src="dist/js/sidebarmenu.js"></script>
-
-    <script src="assets/node_modules/skycons/skycons.js"></script>
-    <script src="assets/node_modules/raphael/raphael-min.js"></script>
-    <script src="assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="assets/node_modules/toast-master/js/jquery.toast.js"></script>
-    <script src="assets/node_modules/dropify/dist/js/dropify.min.js"></script>
-
-    
-
     <script>
         @if (session('success'))
             $.toast({
@@ -106,14 +89,14 @@
         @endif
 
 
-        $(document).ready(function() {
-            $('.dropify').dropify({
-                messages: {
-                    default: "{{ __('text.dropify.messages.default') }}",
-                    replace: "{{ __('text.dropify.messages.replace') }}",
-                    error: "{{ __('text.dropify.messages.error') }}"
-                }
-            });
-        });
+        // $(document).ready(function() {
+        //     $('.dropify').dropify({
+        //         messages: {
+        //             default: "{{ __('text.dropify.messages.default') }}",
+        //             replace: "{{ __('text.dropify.messages.replace') }}",
+        //             error: "{{ __('text.dropify.messages.error') }}"
+        //         }
+        //     });
+        // });
     </script>
 @endprepend

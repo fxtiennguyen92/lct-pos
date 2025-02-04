@@ -1,6 +1,6 @@
 // Custom Variables
 // @import url('https://fonts.googleapis.com/css2?family=Questrial:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
 /*Theme Colors*/
@@ -133,7 +133,7 @@ $grid-gutter-width:         20px !default;
 // Font, line-height, and color for body text, headings, and more.
 
 $font-size-base:              0.875rem;
-$font-family-sans-serif:     "Questrial", sans-serif !default;
+$font-family-sans-serif:     "Montserrat", serif !default;
 
 
 $font-weight-light:           300 !default;
@@ -148,7 +148,7 @@ $h5-font-size:                16px !default;
 $h6-font-size:                14px !default;
 
 $headings-margin-bottom:      (1rem / 2) !default;
-$headings-font-family:        "Questrial", sans-serif !default;
+$headings-font-family:        "Montserrat", sans-serif !default;
 $headings-font-weight:        300 !default;
 $headings-color:              inherit !default;
 

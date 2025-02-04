@@ -1,25 +1,12 @@
-<div class="user-profile">
-    <div class="user-pro-body">
-        <div>
-            <img src="{{ auth()->user->avatar ?? 'assets/images/users/1.jpg' }}" alt="{{ auth()->user->name ?? 'Administrator' }}" class="img-circle">
-        </div>
-        <div class="dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-bs-toggle="dropdown"
-                role="button" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name ?? 'User' }}
-                <span class="caret"></span>
-            </a>
-            <div class="dropdown-menu animated flipInY">
-                <a href="" class="dropdown-item">
-                    <i class="icon-user me-1"></i> {{ __('text.profile') }}</a>
-
-                <a href="" class="dropdown-item">
-                    <i class="icon-key me-1"></i> {{ __('text.sidebar.password') }}</a>
-
-                <!-- Log out -->
-                <div class="dropdown-divider"></div>
-                <a href="{{ route('logout') }}" class="dropdown-item">
-                    <i class="icon-logout me-1"></i> {{ __('text.buttons.logout') }}</a>
-            </div>
-        </div>
-    </div>
-</div>
+<li class="user-pro">
+    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><img
+            src="{{ auth()->user->avatar ?? 'assets/images/users/1.jpg' }}" alt="user-img" class="img-circle">
+            <span class="hide-menu">{{ auth()->user->name ?? 'User' }}</span></a>
+    <ul aria-expanded="false" class="collapse">
+        <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
+        <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
+        <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
+        <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
+        <li><a href="{{ route('logout') }}"><i class="icon-logout"></i> {{ __('logout') }}</a></li>
+    </ul>
+</li>

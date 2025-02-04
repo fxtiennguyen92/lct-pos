@@ -1,0 +1,9 @@
+{
+    "roles": {
+        "super-admin": "Quản trị cấp cao",
+        "admin": "Quản trị viên",
+        "project-manager": "Quản lý",
+        "staff": "Nhân viên",
+        "client": "Khách hàng"
+    }
+}
