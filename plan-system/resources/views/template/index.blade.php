@@ -16,7 +16,7 @@
                             <img src="logo-light-icon.png" alt="{{ config('app.name') }}" class="light-logo" />
                         </b>
                         <span>
-                            <b>{{ config('app.name') }}</b>Admin
+                            <b>{{ config('app.name') }}</b> Admin
                         {{-- <!-- Logo text -->
                             <img src="images/web/LogoTextColorV2.png" alt="Admin Page" class="dark-logo" style="height: 40px" />
                             <!-- Light Logo text -->
@@ -66,27 +66,27 @@
 
 @prepend('js')
     <script>
-        @if (session('success'))
-            $.toast({
-                heading: "{{ __('text.messages.success') }}",
-                text: "{{ session('success') }}",
-                position: 'top-right',
-                icon: 'success',
-                loader: false,
-                hideAfter: 4000,
-            });
-        @endif
+        // @if (session('success'))
+        //     $.toast({
+        //         heading: "{{ __('text.messages.success') }}",
+        //         text: "{{ session('success') }}",
+        //         position: 'top-right',
+        //         icon: 'success',
+        //         loader: false,
+        //         hideAfter: 4000,
+        //     });
+        // @endif
 
-        @if (session('error'))
-            $.toast({
-                heading: "{{ __('text.messages.error') }}",
-                text: "{{ session('error') }}",
-                position: 'top-right',
-                icon: 'error',
-                loader: false,
-                hideAfter: 4000,
-            });
-        @endif
+        // @if (session('error'))
+        //     $.toast({
+        //         heading: "{{ __('text.messages.error') }}",
+        //         text: "{{ session('error') }}",
+        //         position: 'top-right',
+        //         icon: 'error',
+        //         loader: false,
+        //         hideAfter: 4000,
+        //     });
+        // @endif
 
 
         // $(document).ready(function() {

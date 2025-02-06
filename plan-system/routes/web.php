@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,9 @@ Route::get('/login', function () {
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
-})->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.request');
+Route::get('/reset-password', [AuthController::class, 'viewResetPassword'])->name('password.view');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+
+// Locale
+Route::get('/change-locale/{locale}', [LanguageController::class, 'change'])->name('change.locale');

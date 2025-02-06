@@ -5,5 +5,13 @@
         "project-manager": "Manager",
         "staff": "Staff",
         "client": "Client"
-    }
+    },
+
+    "Admin system": "Administration system",
+    "Forgot password ?": "Forgot password ?",
+    "Log in": "Log in",
+    "Email": "Email",
+    "Password": "Password",
+    "Recover password": "Reset password",
+    "Back to log in": "Back to Log in"
 }

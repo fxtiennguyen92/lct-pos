@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'locale',
+        'profile_photo_path',
+        'active_flg',
     ];
 
     /**
@@ -42,6 +46,17 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'active_flg' => 'boolean'
         ];
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('active_flg', true);
+    }
+
+    public static function checkActiveUser(string $email)
+    {
+        return User::where('email', $email)->active()->first();
     }
 }

@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'inactived' => 'Your account has been deactivated. Please contact the administrator.',
+    'failed'   => 'Thông tin tài khoản không tìm thấy trong hệ thống.',
+    'password' => 'Mật khẩu không đúng.',
+    'throttle' => 'Vượt quá số lần đăng nhập cho phép. Vui lòng thử lại sau :seconds giây.',
+    'inactived' => 'Tài khoản của bạn bị khóa. Vui lòng liên hệ với quản trị viên.',
 ];

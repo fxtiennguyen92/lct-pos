@@ -5,5 +5,31 @@
         "project-manager": "Quản lý",
         "staff": "Nhân viên",
         "client": "Khách hàng"
-    }
+    },
+
+    "Reset Password Notification": "Cài đặt lại mật khẩu",
+    "You are receiving this email because we received a password reset request for your account.": "Bạn nhận được email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.",
+    "Reset Password": "Đặt lại mật khẩu",
+    "This password reset link will expire in :count minutes.": "Link cài đặt mật khẩu có thời hạn trong :count phút.",
+    "If you did not request a password reset, no further action is required.": "Nếu bạn không yêu cầu đặt lại mật khẩu, bạn bỏ qua email này.",
+    "All rights reserved.": "All rights reserved.",
+    "Hello!": "Xin chào,",
+    "Regards,": "Trân trọng,",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below into your web browser:": "Nếu nút :actionText không hoạt động, xin bạn vui lòng sử dụng đường link dưới đây bằng trình duyệt của bạn:",
+
+    "Info": "Thông báo",
+    "Error": "Lỗi",
+    "Warning": "Cảnh báo",
+    "Success": "Thành công",
+
+    "Admin system": "Hệ thống Quản trị",
+    "Forgot password ?": "Quên mật khẩu ?",
+    "Log in": "Đăng nhập",
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "New password": "Mật khẩu mới",
+    "Confirm password": "Xác nhận mật khẩu",
+    "Recover password": "Cài lại mật khẩu",
+    "Back to log in": "Về trang Đăng nhập"
+
 }

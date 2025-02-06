@@ -5,5 +5,28 @@
         "project-manager": "Manager",
         "staff": "Employé",
         "client": "Client"
-    }
+    },
+
+    "Reset Password Notification": "Réinitialisez votre mot de passe",
+    "You are receiving this email because we received a password reset request for your account.": "Cliquez sur ce lien pour réinitialiser votre mot de passe.",
+    "Reset Password": "Réinitialisez votre mot de passe",
+    "This password reset link will expire in :count minutes.": "Le lien de réinitialisation de mot de passe expirera dans :count minutes.",
+    "If you did not request a password reset, no further action is required.": "Si vous n'avez pas demandé à réinitialiser votre mot de passe, vous pouvez ignorer cet email.",
+    "All rights reserved.": "Tous droits réservés.",
+    "Hello!": "Bonjour,",
+    "Regards,": "Cordialement,",
+    "If you're having trouble clicking the :actionText button, copy and paste the URL below into your web browser:": "Si vous ne parvenez pas à cliquer sur le bouton :actionText, copiez et collez le lien ci-dessous dans votre navigateur web:",
+  
+    "Info": "Notification",
+    "Error": "Erreur",
+    "Warning": "Avertissement",
+    "Success": "Succès",
+
+    "Admin system": "Système d'administration",
+    "Forgot password ?": "Mot de passe oublié ?",
+    "Log in": "Connexion",
+    "Email": "Email",
+    "Password": "Mot de passe",
+    "Recover password": "Réinitialiser le mot de passe",
+    "Back to log in": "Retour à la connexion"
 }
