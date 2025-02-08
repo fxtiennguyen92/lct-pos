@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/reservation', function () {
+    return view('calendar.reservation');
+});
 
 
 // Authentication
@@ -22,3 +27,8 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
 
 // Locale
 Route::get('/change-locale/{locale}', [LanguageController::class, 'change'])->name('change.locale');
+
+// Super Admin
+Route::middleware(['auth', 'super-admin'])->group(function () {
+    Route::resource('projects', ProjectController::class);
+});

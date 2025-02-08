@@ -16,10 +16,11 @@
 
     <link href="assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <link href="assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <link href="dist/css/style.min.css" rel="stylesheet">
     <link href="dist/css/pages/ui-bootstrap-page.css" rel="stylesheet">
 
     @stack('css')
+
+    <link href="dist/css/style.min.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CheckProject;
+use App\Http\Middleware\CheckSuperAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,9 +13,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
+        $middleware->alias([
+            'super-admin' => CheckSuperAdmin::class,
+            'has-project' => CheckProject::class
+        ]);
+
         $middleware->web([
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\CheckUserActive::class,
+            
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

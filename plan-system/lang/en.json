@@ -1,15 +1,26 @@
 {
-    "roles": {
-        "super-admin": "Super Admin",
-        "admin": "Admin",
-        "project-manager": "Manager",
-        "staff": "Staff",
-        "client": "Client"
-    },
+    "roles.super-admin": "Super Admin",
+    "roles.admin": "Admin",
+    "roles.project-manager": "Manager",
+    "roles.staff": "Staff",
+    "roles.client": "Client",
+
+    "dropify.messages.default": "Drag and drop a file here or click",
+    "dropify.messages.replace": "Drag and drop or click to replace",
+    "dropify.messages.remove": "Remove",
+    "dropify.messages.error": "Sorry, something wrong happened.",
+    "dropify.error.fileSize": "The file size is too big ({{ value }} max).",
+    "dropify.error.minWidth": "The image width is too small ({{ value }}}px min).",
+    "dropify.error.maxWidth": "The image width is too big ({{ value }}}px max).",
+    "dropify.error.minHeight": "The image height is too small ({{ value }}}px min).",
+    "dropify.error.maxHeight": "The image height is too big ({{ value }}px max).",
+    "dropify.error.imageFormat": "The image format is not allowed ({{ value }} only).",
+    "dropify.error.fileExtension": "The file is not allowed ({{ value }} only).",
 
     "Admin system": "Administration system",
     "Forgot password ?": "Forgot password ?",
     "Log in": "Log in",
+    "Log out": "Log out",
     "Email": "Email",
     "Password": "Password",
     "Recover password": "Reset password",

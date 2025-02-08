@@ -1,11 +1,21 @@
 {
-    "roles": {
-        "super-admin": "Quản trị cấp cao",
-        "admin": "Quản trị viên",
-        "project-manager": "Quản lý",
-        "staff": "Nhân viên",
-        "client": "Khách hàng"
-    },
+    "roles.super-admin": "Quản trị cấp cao",
+    "roles.admin": "Quản trị viên",
+    "roles.project-manager": "Quản lý",
+    "roles.staff": "Nhân viên",
+    "roles.client": "Khách hàng",
+
+    "dropify.messages.default": "Kéo thả hoặc click chọn file",
+    "dropify.messages.replace": "Kéo thả hoặc click để thay thế",
+    "dropify.messages.remove": "Xóa",
+    "dropify.messages.error": "Thao tác lỗi!",
+    "dropify.error.fileSize": "Kích thước file quá lớn  (Tối đa {{ value }}).",
+    "dropify.error.minWidth": "Chiều rộng hình quá nhỏ (Tối thiểu {{ value }}}px).",
+    "dropify.error.maxWidth": "Chiều rộng hình quá lớn (Tối đa {{ value }}}px).",
+    "dropify.error.minHeight": "Chiều cao hình quá nhỏ (Tối thiểu {{ value }}}px).",
+    "dropify.error.maxHeight": "Chiều cao hình quá lớn (Tối đa {{ value }}px).",
+    "dropify.error.imageFormat": "Định dạng hình ảnh không phù hợp (Chỉ {{ value }}).",
+    "dropify.error.fileExtension": "Định dạng file không phù hợp (Chỉ {{ value }}).",
 
     "Reset Password Notification": "Cài đặt lại mật khẩu",
     "You are receiving this email because we received a password reset request for your account.": "Bạn nhận được email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.",
@@ -25,11 +35,15 @@
     "Admin system": "Hệ thống Quản trị",
     "Forgot password ?": "Quên mật khẩu ?",
     "Log in": "Đăng nhập",
+    "Log out": "Thoát ra",
     "Email": "Email",
     "Password": "Mật khẩu",
     "New password": "Mật khẩu mới",
     "Confirm password": "Xác nhận mật khẩu",
     "Recover password": "Cài lại mật khẩu",
-    "Back to log in": "Về trang Đăng nhập"
+    "Back to log in": "Về trang Đăng nhập",
+
+    "Dashboard": "Tổng quan",
+    "Profile": "Hồ sơ"
 
 }

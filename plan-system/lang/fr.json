@@ -1,11 +1,21 @@
 {
-    "roles": {
-        "super-admin": "Super Administrateur",
-        "admin": "Administrateur",
-        "project-manager": "Manager",
-        "staff": "Employé",
-        "client": "Client"
-    },
+    "roles.super-admin": "Super Administrateur",
+    "roles.admin": "Administrateur",
+    "roles.project-manager": "Manager",
+    "roles.staff": "Employé",
+    "roles.client": "Client",
+
+    "dropify.messages.default": "Glissez-déposez un fichier ici ou cliquez",
+    "dropify.messages.replace": "Glissez-déposez un fichier ou cliquez pour remplacer",
+    "dropify.messages.remove": "Supprimer",
+    "dropify.messages.error": "Désolé, il y a une erreur.",
+    "dropify.error.fileSize": "La taille du fichier est trop grande ({{ value }} max).",
+    "dropify.error.minWidth": "La largeur de l'image est trop petite ({{ value }}}px min).",
+    "dropify.error.maxWidth": "La largeur de l'image est trop grande ({{ value }}}px max).",
+    "dropify.error.minHeight": "La hauteur de l'image est trop petite ({{ value }}}px min).",
+    "dropify.error.maxHeight": "La hauteur de l'image est trop grande ({{ value }}px max).",
+    "dropify.error.imageFormat": "Le format d'image n'est pas autorisé ({{ value }} uniquement).",
+    "dropify.error.fileExtension": "Le format du fichier n'est pas autorisé ({{ value }} uniquement).",
 
     "Reset Password Notification": "Réinitialisez votre mot de passe",
     "You are receiving this email because we received a password reset request for your account.": "Cliquez sur ce lien pour réinitialiser votre mot de passe.",
@@ -25,8 +35,13 @@
     "Admin system": "Système d'administration",
     "Forgot password ?": "Mot de passe oublié ?",
     "Log in": "Connexion",
+    "Log out": "Me déconnecter",
+
     "Email": "Email",
     "Password": "Mot de passe",
     "Recover password": "Réinitialiser le mot de passe",
-    "Back to log in": "Retour à la connexion"
+    "Back to log in": "Retour à la connexion",
+
+    "Dashboard": "Tableau de bord",
+    "Profile": "Espace personnel"
 }

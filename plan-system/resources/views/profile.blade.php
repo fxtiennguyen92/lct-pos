@@ -4,7 +4,7 @@
     <!-- Bread crumb and right sidebar toggle -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">{{ __('Profile') }}</h4>
+            <h4 class="text-themecolor">{{ __('Dashboard') }}</h4>
         </div>
     </div>
 

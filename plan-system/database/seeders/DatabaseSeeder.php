@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Language;
 use App\Models\User;
+use App\RolesEnum;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,11 +19,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::create([
             'name' => 'Licortech',
             'email' => 'fx.tiennguyen92@gmail.com',
             'password' => Hash::make('password'),
         ]);
+        Role::create(['name' => RolesEnum::SUPER_ADMIN]);
+        $user->assignRole(RolesEnum::SUPER_ADMIN);
 
         $languages = array(
             ['locale' => 'fr', 'name' => 'Français', 'priority' => 1],

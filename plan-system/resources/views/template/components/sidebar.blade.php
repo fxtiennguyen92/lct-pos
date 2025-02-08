@@ -1,19 +1,34 @@
-<li class="nav-small-cap">--- {{ __('dashboard') }}</li>
+@role(App\RolesEnum::SUPER_ADMIN)
+    <li class="nav-small-cap text-uppercase">--- {{ __('Administrator') }}</li>
+    <li>
+        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+            <i class="ti-harddrives"></i>
+            <span class="hide-menu">{{ __('Business') }}</span>
+        </a>
+        <ul aria-expanded="false" class="collapse">
+            <li>
+                <a id="projects" href="{{ route('projects.index') }}">{{ __('Projects') }}</a>
+            </li>
+        </ul>
+    </li>
+@endrole
 
+<li class="nav-small-cap text-uppercase">--- {{ __('Dashboard') }}</li>
 <li>
     <a class="waves-effect waves-dark" href="{{ route('dashboard') }}" aria-expanded="false">
-        <i class="ti-layout-grid2"></i><span class="hide-menu">{{ __('dashboard') }}</span></a>
+        <i class="ti-layout-grid2"></i><span class="hide-menu">{{ __('Dashboard') }}</span></a>
 </li>
 
+<li class="nav-small-cap text-uppercase">--- {{ __('Settings') }}</li>
 <li>
     {{-- Settings --}}
     <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-        <i class="icon-feed"></i>
-        <span class="hide-menu">{{ __('text.sidebar.posts') }}</span>
+        <i class="ti-briefcase"></i>
+        <span class="hide-menu">{{ __('Business') }}</span>
     </a>
     <ul aria-expanded="false" class="collapse">
         <li>
-            <a id="#" href="#">asdfasd</a>
+            <a id="#" href="#">{{ __('Business hours') }}</a>
         </li>
     </ul>
 </li>
