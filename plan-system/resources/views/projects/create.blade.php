@@ -9,78 +9,102 @@
     </div>
 
     <!-- Page content -->
-    <div class="row">
-        <div class="col-12">
-            <form method="post" action="{{ route('projects.store') }}" enctype="multipart/form-data">
-                @csrf
+    <form id="submitForm" method="post" action="{{ route('projects.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+            <div class="col-lg-8 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title mb-4">{{ __('New project') }}</h4>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="photo" class="form-label">{{ __('Logo') }}</label>
-                                    <input type="file" id="photo" name="photo" class="dropify"
-                                        data-max-file-size="3M"
-                                        data-allowed-file-extensions="jpeg jpg png svg gif webp avif av1" />
+                            <div class="col-md-12">
+                                <div class="form-group @error('code') has-danger @enderror">
+                                    <label class="form-label" for="code">{{ __('Code') }}</label>
+                                    <input id="code" class="form-control @error('code') form-control-danger @enderror"
+                                        type="text" maxlength="50" placeholder="{{ __('Code') }}" name="code"
+                                        value="{{ old('code') }}" required>
+                                    @error('code')
+                                        <small class="form-control-feedback">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
-
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group @error('name') has-danger @enderror">
-                                            <label class="form-label" for="name">{{ __('Name') }}</label>
-                                            <input id="name"
-                                                class="form-control @error('name') form-control-danger @enderror"
-                                                type="text" maxlength="50" placeholder="{{ __('Name') }}"
-                                                name="name" value="{{ old('name') }}" required>
-                                            @error('name')
-                                                <small class="form-control-feedback">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group @error('code') has-danger @enderror">
-                                            <label class="form-label" for="code">{{ __('Code') }}</label>
-                                            <input id="code"
-                                                class="form-control @error('code') form-control-danger @enderror"
-                                                type="text" maxlength="50" placeholder="{{ __('Code') }}"
-                                                name="code" value="{{ old('code') }}" required>
-                                            @error('code')
-                                                <small class="form-control-feedback">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="form-group @error('name') has-danger @enderror">
+                                    <label class="form-label" for="name">{{ __('Name') }}</label>
+                                    <input id="name" class="form-control @error('name') form-control-danger @enderror"
+                                        type="text" maxlength="50" placeholder="{{ __('Name') }}" name="name"
+                                        value="{{ old('name') }}" required>
+                                    @error('name')
+                                        <small class="form-control-feedback">{{ $message }}</small>
+                                    @enderror
                                 </div>
-
-                                <div class="col-md-12">
-                                    <div class="r-panel-body">
-                                        <ul id="themecolors" class="m-t-20">
-                                            <li><b>With Light sidebar</b></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme">1</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme working">3</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
-                                            <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme">7</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
-                                            <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme">12</a></li>
-                                        </ul>
-                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group @error('domain') has-danger @enderror">
+                                    <label class="form-label" for="domain">{{ __('Domain') }}</label>
+                                    <select class="form-select" id="domain" name="domain">
+                                        <option disabled selected>- {{ __('Domain') }} -</option>
+                                        @foreach (App\DomainsEnum::values() as $domain)
+                                            <option value="{{ $domain }}" @selected(old('domain') == $domain)>
+                                                {{ __('domains.' . $domain) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('domain')
+                                        <small class="form-control-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="logo" class="form-label">{{ __('Logo') }}</label>
+                                    <input type="file" id="logo" name="logo" class="dropify"
+                                        data-max-file-size="3M"
+                                        data-allowed-file-extensions="jpeg jpg png svg gif webp avif av1" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">{{ __('Status') }}</h4>
+                                <div class="form-group @error('status') has-danger @enderror">
+                                    <select class="form-select" id="status" disabled>
+                                        @foreach (App\ProjectStatusEnum::values() as $key => $status)
+                                            <option value="{{ $key }}">{{ $status }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('status')
+                                        <small class="form-control-feedback">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">{{ __('Actions') }}</h4>
+                                <div>
+                                    <button type="button"
+                                        class="btn-create btn btn-success me-2 text-white">{{ __('Create') }}</button>
+                                    <a href="{{ route('projects.index') }}"
+                                        class="btn btn-dark text-white">{{ __('Cancel') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 @endpush
 
 @push('css')
@@ -108,6 +132,27 @@
                     fileExtension: @json(__('dropify.error.fileExtension')),
                 }
             });
+
+            // Event
+            $('.btn-create').on('click', function() {
+                $(this).prop('disabled', true);
+
+                Swal.fire({
+                    title: @json(__('Create')),
+                    text: @json(__('Are you sure you want to create with this data ?')),
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: @json(__('Confirm')),
+                    cancelButtonText: @json(__('Cancel')),
+                }).then((result) => {
+                    if (result.value) {
+                        $('#submitForm').submit();
+                    } else {
+                        $(this).prop('disabled', false);
+                        return false;
+                    }
+                });
+            })
         });
     </script>
 @endpush

@@ -159,6 +159,7 @@ return [
     'url' => 'Le :attribute doit être une URL valide.',
     'ulid' => 'Le :attribute doit être un ULID valide.',
     'uuid' => 'Le :attribute doit être un UUID valide.',
+    'phone' => 'Le :attribute doit être un numéro valide.',
 
     /*
     |--------------------------------------------------------------------------
@@ -319,6 +320,8 @@ return [
         "websites" => "sites web",
         "year" => "année",
         "years" => "années",
+        'role'  => 'position',
+        'phone_number'  => 'téléphone',
     ],
 
 ];

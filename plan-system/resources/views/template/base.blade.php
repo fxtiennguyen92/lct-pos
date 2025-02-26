@@ -9,18 +9,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{ asset('') }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="logo-light-icon.png">
     <title>{{ config('app.name') }}</title>
 
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet" >
     <link href="assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <link href="assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="assets/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="dist/css/pages/ui-bootstrap-page.css" rel="stylesheet">
 
     @stack('css')
 
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <link href="dist/css/custom.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -50,8 +54,10 @@
     <script src="dist/js/custom.min.js"></script>
 
     <script src="assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     @stack('js')
 </body>

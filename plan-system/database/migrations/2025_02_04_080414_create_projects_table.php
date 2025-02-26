@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('logo_path', 2048)->nullable();
             $table->string('skin', 100)->nullable();
-            $table->softDeletes();
+            $table->string('domain', 100)->nullable();
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
         });
 

@@ -1,17 +1,45 @@
-@role(App\RolesEnum::SUPER_ADMIN)
-    <li class="nav-small-cap text-uppercase">--- {{ __('Administrator') }}</li>
+@if (Auth::user()->scope == App\ScopesEnum::SUPER->value)
+    <li class="nav-small-cap text-uppercase">--- {{ __('Administration') }}</li>
     <li>
-        <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-            <i class="ti-harddrives"></i>
-            <span class="hide-menu">{{ __('Business') }}</span>
-        </a>
-        <ul aria-expanded="false" class="collapse">
-            <li>
-                <a id="projects" href="{{ route('projects.index') }}">{{ __('Projects') }}</a>
-            </li>
-        </ul>
+        <a id="projects" class="waves-effect waves-dark" href="{{ route('projects.index') }}" aria-expanded="false">
+            <i class="ti-harddrives"></i><span class="hide-menu">{{ __('Projects') }}</span></a>
     </li>
-@endrole
+@endif
+
+@unlessrole(App\RolesEnum::STAFF->value)
+    @if (session('projectCode'))
+        <li class="nav-small-cap text-uppercase">--- {{ __('My business') }}</li>
+        <li>
+            <a id="dashboard" class="waves-effect waves-dark" href="{{ route('projects.show', session('projectCode')) }}"
+                aria-expanded="false">
+                <i class="ti-layout-grid2"></i><span class="hide-menu">{{ __('Dashboard') }}</span></a>
+        </li>
+        <li>
+            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                <i class="ti-harddrives"></i>
+                <span class="hide-menu">{{ __('Human resources') }}</span>
+            </a>
+            <ul aria-expanded="false" class="collapse">
+                <li>
+                    <a id="accounts"
+                        href="{{ route('project-accounts.index', session('projectCode')) }}">{{ __('Accounts') }}</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                <i class="ti-settings"></i>
+                <span class="hide-menu">{{ __('Settings') }}</span>
+            </a>
+            <ul aria-expanded="false" class="collapse">
+                <li>
+                    
+                </li>
+            </ul>
+        </li>
+    @endif
+@endunlessrole
+
 
 <li class="nav-small-cap text-uppercase">--- {{ __('Dashboard') }}</li>
 <li>

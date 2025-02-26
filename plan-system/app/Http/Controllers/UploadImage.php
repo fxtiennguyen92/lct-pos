@@ -16,18 +16,23 @@ class UploadImage extends Controller
         return 'https://ui-avatars.com/api/?name='.urlencode($text).'&color=fff&background=0087FA';
     }
 
-    public static function updateImage(UploadedFile $photo, $storagePath = 'images', $previous = null)
+    public static function updateImage($image, $storagePath = 'images', string $imageName, $previous = null)
     {
-        return $photo->storePublicly($storagePath, ['disk' => config('filesystems.default')]);
-
+        // Delete previous image
         if ($previous) {
-            Storage::disk(config('filesystems.default'))->delete($previous);
+            Storage::delete($previous);
         }
+        
+        // Store the image in the public disk under the images folder
+        $path = $image->storeAs($storagePath, $imageName, 'public');
+        
+        // Generate the full URL for the image
+        return Storage::url($path);
     }
 
     public static function deleteImage($imagePath)
     {
-        return Storage::disk(config('filesystems.default'))->delete($imagePath);
+        return Storage::delete($imagePath);
     }
 
     

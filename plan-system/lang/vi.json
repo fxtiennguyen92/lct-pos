@@ -1,9 +1,17 @@
 {
     "roles.super-admin": "Quản trị cấp cao",
     "roles.admin": "Quản trị viên",
-    "roles.project-manager": "Quản lý",
+    "roles.director": "Giám đốc",
+    "roles.manager": "Quản lý",
     "roles.staff": "Nhân viên",
     "roles.client": "Khách hàng",
+
+    "domains.restaurant": "Nhà hàng",
+    "domains.nail-salon": "Tiệm Nail",
+
+    "status.setting-up": "Đang thiết lập",
+    "status.active": "Hoạt động",
+    "status.inactive": "Vô hiệu",
 
     "dropify.messages.default": "Kéo thả hoặc click chọn file",
     "dropify.messages.replace": "Kéo thả hoặc click để thay thế",
@@ -16,6 +24,30 @@
     "dropify.error.maxHeight": "Chiều cao hình quá lớn (Tối đa {{ value }}px).",
     "dropify.error.imageFormat": "Định dạng hình ảnh không phù hợp (Chỉ {{ value }}).",
     "dropify.error.fileExtension": "Định dạng file không phù hợp (Chỉ {{ value }}).",
+
+    "messages.create.success": "Thêm dữ liệu mới thành công.",
+    "messages.delete.success": "Đã xóa dữ liệu thành công.",
+    "messages.delete.failed": "Xóa dữ liệu thất bại.",
+    "messages.update.success": "Cập nhật dữ liệu thành công.",
+    "messages.update.failed": "Cập nhật dữ liệu thất bại.",
+
+    "messages.project.not_found": "Không tìm thấy dự án, vui lòng chọn lại !",
+
+    "Cancel": "Hủy bỏ",
+    "Create": "Tạo mới",
+    "Modify": "Thay đổi",
+    "Update": "Cập nhật",
+    "Save": "Lưu lại",
+    "Delete": "Xóa bỏ",
+    "Confirm": "Xác nhận",
+    "Restore": "Khôi phục",
+    "Back": "Quay lại",
+
+    "Are you sure you want to create with this data ?": "Bạn muốn tạo mới với dữ liệu này ?",
+    "Do you want to update this data ?": "Bạn chắc chắn muốn thay đổi dữ liệu này ?",
+    "Do you want to delete this image ?": "Bạn chắc chắn muốn xóa hình ảnh này ?",
+    "Do you want to delete this data ?": "Bạn chắc chắn muốn xóa dữ liệu này ?",
+    "Do you want to restore this data ?": "Bạn chắc chắn muốn khôi phục dữ liệu này ?",
 
     "Reset Password Notification": "Cài đặt lại mật khẩu",
     "You are receiving this email because we received a password reset request for your account.": "Bạn nhận được email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.",
@@ -43,7 +75,33 @@
     "Recover password": "Cài lại mật khẩu",
     "Back to log in": "Về trang Đăng nhập",
 
+    "Search": "Tìm kiếm",
+    "Actions": "Thao tác",
+    "Last modified": "Cập nhật gần nhất",
+    "First name": "Tên",
+    "Last name": "Họ",
+    "Full name": "Họ tên",
+    "Role": "Chức vụ",
+    "Phone number": "Số điện thoại",
+    "Code": "Mã",
+    "Name": "Tên",
+    "Domain": "Ngành nghề",
+    "Status": "Trạng thái",
+    "Logo": "Logo",
+
+    "New project": "Dự án mới",
+    "Edit project": "Chỉnh sửa dự án",
+    "New account": "Tài khoản mới",
+    "Edit account": "Chỉnh sửa tài khoản",
+
+    "Administration": "Quản trị",
+    "Projects": "Dự án",
     "Dashboard": "Tổng quan",
-    "Profile": "Hồ sơ"
+    "Profile": "Hồ sơ",
+    "Settings": "Thiết lập",
+    "My business": "Kinh doanh",
+    "Human resources": "Nhân sự",
+    "Accounts": "Tài khoản",
+    "Languages": "Ngôn ngữ"
 
 }

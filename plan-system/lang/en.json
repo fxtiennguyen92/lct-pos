@@ -1,9 +1,17 @@
 {
     "roles.super-admin": "Super Admin",
     "roles.admin": "Admin",
-    "roles.project-manager": "Manager",
+    "roles.director": "Director",
+    "roles.manager": "Manager",
     "roles.staff": "Staff",
     "roles.client": "Client",
+
+    "domains.restaurant": "Restaurant",
+    "domains.nail-salon": "Nail salon",
+
+    "status.setting-up": "Setting up",
+    "status.active": "Active",
+    "status.inactive": "Inactive",
 
     "dropify.messages.default": "Drag and drop a file here or click",
     "dropify.messages.replace": "Drag and drop or click to replace",
@@ -16,6 +24,13 @@
     "dropify.error.maxHeight": "The image height is too big ({{ value }}px max).",
     "dropify.error.imageFormat": "The image format is not allowed ({{ value }} only).",
     "dropify.error.fileExtension": "The file is not allowed ({{ value }} only).",
+
+    "message.delete.success": "Data deleted successfully.",
+    "message.delete.failed": "Data deleted failed.",
+    "message.update.success": "Data updated successfully.",
+    "message.update.failed": "Data updated failed.",
+
+    "messages.project.not_found": "Project not found, please select again !",
 
     "Admin system": "Administration system",
     "Forgot password ?": "Forgot password ?",

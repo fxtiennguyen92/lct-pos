@@ -19,6 +19,13 @@ return new class extends Migration
             $table->boolean('active_flg')->default(true);
             $table->timestamps();
         });
+
+        Schema::create('project_language', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('language_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
+        });
     }
 
     /**

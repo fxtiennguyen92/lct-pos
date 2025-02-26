@@ -13,12 +13,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('locale', 10)->nullable();
+
+            $table->string('name')->nullable();
+            $table->string('first_name')->nullable();
+            $table->smallInteger('gender')->nullable();
+
+            $table->string('country_code', 6)->nullable();
+            $table->string('phone_number', 20)->nullable();
+            $table->timestamp('phone_number_verified_at')->nullable();
+
+            $table->string('scope', 10)->default('user');
             $table->boolean('active_flg')->default(true);
             $table->rememberToken();
             $table->timestamps();
@@ -38,6 +48,18 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('init_passwords', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('password');
+        });
+
+        Schema::create('phone_number_otps', function (Blueprint $table) {
+            $table->string('email')->primary();
+            $table->string('otp', 5);
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
+        });
     }
 
     /**
@@ -48,5 +70,7 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('phone_number_otps');
+        Schema::dropIfExists('init_passwords');
     }
 };

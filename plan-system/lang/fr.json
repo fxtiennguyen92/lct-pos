@@ -1,9 +1,17 @@
 {
     "roles.super-admin": "Super Administrateur",
     "roles.admin": "Administrateur",
-    "roles.project-manager": "Manager",
+    "roles.director": "Directeur",
+    "roles.manager": "Manager",
     "roles.staff": "Employé",
     "roles.client": "Client",
+
+    "domains.restaurant": "Restaurant",
+    "domains.nail-salon": "Salon de beauté",
+
+    "status.setting-up": "Mise en place",
+    "status.active": "Actif",
+    "status.inactive": "Inactif",
 
     "dropify.messages.default": "Glissez-déposez un fichier ici ou cliquez",
     "dropify.messages.replace": "Glissez-déposez un fichier ou cliquez pour remplacer",
@@ -16,6 +24,28 @@
     "dropify.error.maxHeight": "La hauteur de l'image est trop grande ({{ value }}px max).",
     "dropify.error.imageFormat": "Le format d'image n'est pas autorisé ({{ value }} uniquement).",
     "dropify.error.fileExtension": "Le format du fichier n'est pas autorisé ({{ value }} uniquement).",
+
+    "message.delete.success": "Données supprimées avec succès.",
+    "message.delete.failed": "La suppression des données a échoué.",
+    "message.update.success": "Données mises à jour avec succès.",
+    "message.update.failed": "La mise à jour des données a échoué.",
+
+    "messages.project.not_found": "Projet non trouvé, veuillez sélectionner à nouveau !",
+
+    "Cancel": "Annuler",
+    "Create": "Créer",
+    "Modify": "Changer",
+    "Update" : "Mise à jour",
+    "Save": "Enregistrer",
+    "Delete": "Supprimer",
+    "Confirm": "Confirmer",
+    "Back": "Retourner",
+
+    "Are you sure you want to create with this data ?": "Êtes-vous sûr de vouloir créer avec ces données ?",
+    "Do you want to update this data ?": "Etes-vous sûr de vouloir modifier ces données ?",
+    "Do you want to delete this image ?": "Voulez-vous supprimer l'image ?",
+    "Do you want to delete this data ?": "Etes-vous sûr de vouloir supprimer ces données ?",
+    "Do you want to restore this data ?": "Etes-vous sûr de vouloir restaurer ces données ?",
 
     "Reset Password Notification": "Réinitialisez votre mot de passe",
     "You are receiving this email because we received a password reset request for your account.": "Cliquez sur ce lien pour réinitialiser votre mot de passe.",
@@ -42,6 +72,32 @@
     "Recover password": "Réinitialiser le mot de passe",
     "Back to log in": "Retour à la connexion",
 
+    "Search": "Rechercher",
+    "Actions": "Actions",
+    "Last modified": "Dernière modification",
+    "First name": "Prénom",
+    "Last name": "Nom",
+    "Full name": "Nom",
+    "Role": "Position",
+    "Phone number": "Téléphone",
+    "Code": "Mã",
+    "Nom": "Tên",
+    "Domaine": "Ngành nghề",
+    "Statut": "Trạng thái",
+    "Logo": "Logo",
+
+    "Nouveau projet": "Dự án mới",
+    "Modifier le projet": "Chỉnh sửa dự án",
+    "Nouveau account": "Tài khoản mới",
+    "Modifier le compte": "Chỉnh sửa tài khoản",
+
+    "Administration": "Administration",
+    "Projects": "Projets",
     "Dashboard": "Tableau de bord",
-    "Profile": "Espace personnel"
+    "Profile": "Espace personnel",
+    "Settings": "Paramètres",
+    "My business": "Mon entreprise",
+    "Human resources": "Ressources humaines",
+    "Accounts": "Comptes",
+    "Languages": "Langues"
 }

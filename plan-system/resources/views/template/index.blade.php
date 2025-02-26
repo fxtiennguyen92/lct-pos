@@ -17,7 +17,7 @@
                         </b>
                         <span>
                             <b>{{ config('app.name') }}</b> Admin
-                        {{-- <!-- Logo text -->
+                            {{-- <!-- Logo text -->
                             <img src="images/web/LogoTextColorV2.png" alt="Admin Page" class="dark-logo" style="height: 40px" />
                             <!-- Light Logo text -->
                             <img src="images/web/LogoTextColorV2.png" alt="Admin Page" class="light-logo" style="height: 40px" /> --}}
@@ -61,11 +61,16 @@
 @endpush
 
 @prepend('css')
-    
 @endprepend
 
 @prepend('js')
     <script>
+        $(document).ready(function() {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+
         // @if (session('success'))
         //     $.toast({
         //         heading: "{{ __('text.messages.success') }}",
@@ -77,26 +82,15 @@
         //     });
         // @endif
 
-        // @if (session('error'))
-        //     $.toast({
-        //         heading: "{{ __('text.messages.error') }}",
-        //         text: "{{ session('error') }}",
-        //         position: 'top-right',
-        //         icon: 'error',
-        //         loader: false,
-        //         hideAfter: 4000,
-        //     });
-        // @endif
-
-
-        // $(document).ready(function() {
-        //     $('.dropify').dropify({
-        //         messages: {
-        //             default: "{{ __('text.dropify.messages.default') }}",
-        //             replace: "{{ __('text.dropify.messages.replace') }}",
-        //             error: "{{ __('text.dropify.messages.error') }}"
-        //         }
-        //     });
-        // });
+        @if (session('system_error'))
+            $.toast({
+                heading: "{{ __('Error') }}",
+                text: "{{ session('system_error') }}",
+                position: 'bottom-right',
+                icon: 'error',
+                loader: false,
+                hideAfter: 3000,
+            });
+        @endif
     </script>
 @endprepend

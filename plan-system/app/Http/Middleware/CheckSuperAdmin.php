@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\User;
 use App\RolesEnum;
+use App\ScopesEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class CheckSuperAdmin
     {
         // Super admin
         $user = User::find(Auth::user()->id);
-        if ($user->hasRole(RolesEnum::SUPER_ADMIN)) {
+        if ($user->scope == ScopesEnum::SUPER->value) {
             return $next($request);
         }
 

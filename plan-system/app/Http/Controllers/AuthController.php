@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -73,8 +77,17 @@ class AuthController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
+    /**
+     * View 
+     */
     public function viewResetPassword(Request $request)
     {
+        $locale = $request->get('lang');
+        if (in_array($locale, Language::getLocaleArray())) {
+            App::setLocale($locale);
+            Session::put('locale', $locale);
+        }
+
         return view('auth.reset-password');
     }
 
@@ -104,8 +117,18 @@ class AuthController extends Controller
                 ])->setRememberToken($token);
 
                 $user->save();
+
+                event(new PasswordReset($user));
             }
         );
+
+        if ($status === Password::INVALID_TOKEN || $status === Password::INVALID_USER) {
+            back()->withInput($request->except('password'))->with('error', __('passwords.token'));
+        }
+
+        if ($status === Password::RESET_THROTTLED) {
+            back()->withInput($request->except('password'))->with('error', __('passwords.throttled'));
+        }
 
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->withInput($request->except('password'))->with('info', __('passwords.reset'))

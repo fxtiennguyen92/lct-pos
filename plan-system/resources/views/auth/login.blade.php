@@ -141,7 +141,7 @@
                 $.toast({
                     heading: "{{ __('Info') }}",
                     text: "{{ session('info') }}",
-                    position: 'top-right',
+                    position: 'bottom-right',
                     icon: 'success',
                     loader: false,
                     hideAfter: 4000,
