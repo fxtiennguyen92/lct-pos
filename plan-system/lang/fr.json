@@ -32,14 +32,27 @@
 
     "messages.project.not_found": "Projet non trouvé, veuillez sélectionner à nouveau !",
 
+    "day.0": "Dimanche",
+    "day.1": "Lundi",
+    "day.2": "Mardi",
+    "day.3": "Mercredi",
+    "day.4": "Jeudi",
+    "day.5": "Vendredi",
+    "day.6": "Samedi",
+    "day.7": "Dimanche",
+    "Close": "Fermé",
+    "Open": "Ouvert",
+
     "Cancel": "Annuler",
     "Create": "Créer",
     "Modify": "Changer",
-    "Update" : "Mise à jour",
+    "Update": "Mise à jour",
     "Save": "Enregistrer",
     "Delete": "Supprimer",
     "Confirm": "Confirmer",
     "Back": "Retourner",
+
+    "Updating": "Mise à jour",
 
     "Are you sure you want to create with this data ?": "Êtes-vous sûr de vouloir créer avec ces données ?",
     "Do you want to update this data ?": "Etes-vous sûr de vouloir modifier ces données ?",
@@ -56,7 +69,7 @@
     "Hello!": "Bonjour,",
     "Regards,": "Cordialement,",
     "If you're having trouble clicking the :actionText button, copy and paste the URL below into your web browser:": "Si vous ne parvenez pas à cliquer sur le bouton :actionText, copiez et collez le lien ci-dessous dans votre navigateur web:",
-  
+
     "Info": "Notification",
     "Error": "Erreur",
     "Warning": "Avertissement",
@@ -80,16 +93,19 @@
     "Full name": "Nom",
     "Role": "Position",
     "Phone number": "Téléphone",
-    "Code": "Mã",
-    "Nom": "Tên",
-    "Domaine": "Ngành nghề",
-    "Statut": "Trạng thái",
+    "Code": "Code",
+    "Name": "Nom",
+    "Domain": "Domaine",
+    "Status": "Statut",
     "Logo": "Logo",
 
-    "Nouveau projet": "Dự án mới",
-    "Modifier le projet": "Chỉnh sửa dự án",
-    "Nouveau account": "Tài khoản mới",
-    "Modifier le compte": "Chỉnh sửa tài khoản",
+    "New project": "Nouveau projet",
+    "Edit project": "Modifier le projet",
+    "New account": "Nouveau account",
+    "Edit account": "Modifier le compte",
+    "Set standard hours": "Définir des horaires standards",
+    "Configure the standard hours of operation for this location": "Configurer les heures d'ouverture standard pour cette entreprise",
+    "This change will automatically update the working hours of the staffs": "Ce changement mettra automatiquement à jour les horaires de travail du personnel",
 
     "Administration": "Administration",
     "Projects": "Projets",
@@ -97,7 +113,10 @@
     "Profile": "Espace personnel",
     "Settings": "Paramètres",
     "My business": "Mon entreprise",
-    "Human resources": "Ressources humaines",
+    "Human resources": "RH",
     "Accounts": "Comptes",
-    "Languages": "Langues"
+    "Languages": "Langues",
+    "Business": "Entreprise",
+    "Working hours": "Horaires",
+    "Special hours": "Horaires exceptionnels"
 }

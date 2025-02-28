@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProjectAccountController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SpecialHourController;
+use App\Http\Controllers\WorkingHourController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,10 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('has-project')->group(function () {
         Route::resource('business/{projectCode}/project-accounts', ProjectAccountController::class)->except('destroy');
 
-        Route::resource('business/{projectCode}/settings/business-hours', ProjectAccountController::class)->except('destroy');
-    });
-
-    Route::get('/w', function () {
-        return view('business.business-hours.working-hours');
+        Route::get('business/{projectCode}/working-hours', [WorkingHourController::class, 'edit'])->name('working-hours.edit');
+        Route::post('business/{projectCode}/working-hours', [WorkingHourController::class, 'update'])->name('working-hours.update');
+    
+        Route::resource('business/{projectCode}/special-hours', SpecialHourController::class)->except('show');
     });
 });

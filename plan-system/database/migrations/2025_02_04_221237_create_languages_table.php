@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Language;
+use App\Models\Project;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,8 +24,8 @@ return new class extends Migration
 
         Schema::create('project_language', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('language_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Project::class);
+            $table->foreignIdFor(Language::class);
             $table->timestamps();
         });
     }
@@ -34,5 +36,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('languages');
+        Schema::dropIfExists('project_language');
     }
 };

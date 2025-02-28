@@ -33,6 +33,17 @@
 
     "messages.project.not_found": "Không tìm thấy dự án, vui lòng chọn lại !",
 
+    "day.0": "Chủ nhật",
+    "day.1": "Thứ 2",
+    "day.2": "Thứ 3",
+    "day.3": "Thứ 4",
+    "day.4": "Thứ 5",
+    "day.5": "Thứ 6",
+    "day.6": "Thứ 7",
+    "day.7": "Chủ nhật",
+    "Close": "Đóng cửa",
+    "Open": "Mở cửa",
+
     "Cancel": "Hủy bỏ",
     "Create": "Tạo mới",
     "Modify": "Thay đổi",
@@ -42,6 +53,8 @@
     "Confirm": "Xác nhận",
     "Restore": "Khôi phục",
     "Back": "Quay lại",
+
+    "Updating": "Đang thực hiện cập nhật",
 
     "Are you sure you want to create with this data ?": "Bạn muốn tạo mới với dữ liệu này ?",
     "Do you want to update this data ?": "Bạn chắc chắn muốn thay đổi dữ liệu này ?",
@@ -93,6 +106,9 @@
     "Edit project": "Chỉnh sửa dự án",
     "New account": "Tài khoản mới",
     "Edit account": "Chỉnh sửa tài khoản",
+    "Set standard hours": "Cài đặt khung giờ làm việc",
+    "Configure the standard hours of operation for this location": "Cấu hình khung giờ hoạt động tiêu chuẩn cho doanh nghiệp",
+    "This change will automatically update the working hours of the staffs": "Thay đổi sẽ tự động cập nhật giờ làm việc của các nhân viên", 
 
     "Administration": "Quản trị",
     "Projects": "Dự án",
@@ -102,6 +118,9 @@
     "My business": "Kinh doanh",
     "Human resources": "Nhân sự",
     "Accounts": "Tài khoản",
-    "Languages": "Ngôn ngữ"
+    "Languages": "Ngôn ngữ",
+    "Business": "Doanh nghiệp",
+    "Working hours": "Giờ làm việc",
+    "Special hours": "Giờ làm ngoại lệ"
 
 }

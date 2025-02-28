@@ -16,7 +16,7 @@
         </li>
         <li>
             <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                <i class="ti-harddrives"></i>
+                <i class="icon-people"></i>
                 <span class="hide-menu">{{ __('Human resources') }}</span>
             </a>
             <ul aria-expanded="false" class="collapse">
@@ -33,7 +33,10 @@
             </a>
             <ul aria-expanded="false" class="collapse">
                 <li>
-                    
+                    <a id="working-hours" href="{{ route('working-hours.edit', session('projectCode')) }}">{{ __('Working hours') }}</a>
+                </li>
+                <li>
+                    <a id="special-hours" href="{{ route('special-hours.index', session('projectCode')) }}">{{ __('Special hours') }}</a>
                 </li>
             </ul>
         </li>
@@ -55,15 +58,13 @@
         <span class="hide-menu">{{ __('Business') }}</span>
     </a>
     <ul aria-expanded="false" class="collapse">
-        <li>
-            <a id="#" href="#">{{ __('Business hours') }}</a>
-        </li>
+       
     </ul>
 </li>
-<li class="nav-small-cap">--- {{ __('support') }}</li>
+<li class="nav-small-cap">--- {{ __('Support') }}</li>
 <li>
     <a class="waves-effect waves-dark" href="{{ route('logout') }}" aria-expanded="false">
-        <i class="icon-logout"></i><span class="hide-menu">{{ __('logout') }}</span></a>
+        <i class="icon-logout"></i><span class="hide-menu">{{ __('Log out') }}</span></a>
 </li>
 
 <li>

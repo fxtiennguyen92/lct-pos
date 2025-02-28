@@ -125,6 +125,11 @@ return [
     'url'                  => 'Trường :attribute không giống với định dạng một URL.',
     'uuid'                 => 'Trường :attribute phải là một chuỗi UUID hợp lệ.',
     'phone'                => 'Trường :attribute phải là một số hợp lệ.',
+    'working_hour' => [
+        'time' => 'Giờ làm việc vào :attribute phải theo định dạng HH:MM (24 giờ).',
+        'group' => 'Giờ đóng cửa vào :attribute phải lớn hơn giờ mở cửa.',
+        'shift' => 'Giờ làm việc của ca sau vào :attribute phải lớn hơn ca trước.',
+    ],
 
     /*
     |--------------------------------------------------------------------------

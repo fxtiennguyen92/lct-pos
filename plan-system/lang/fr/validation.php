@@ -160,6 +160,11 @@ return [
     'ulid' => 'Le :attribute doit être un ULID valide.',
     'uuid' => 'Le :attribute doit être un UUID valide.',
     'phone' => 'Le :attribute doit être un numéro valide.',
+    'working_hour' => [
+        'time' => "L'horaire de travail du :attribute doit être au format HH:MM (24 heures).",
+        'group' => "L'heure de fermeture du :attribute doit être supérieure à l'heure d'ouverture.",
+        'shift' => "Les heures de travail du deuxième quart de travail du :attribute doivent être supérieures à celles du quart de travail précédent.",
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -161,6 +161,11 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
     'phone' => 'The :attribute field must be a valid number.',
+    'working_hour' => [
+        'time' => 'The working hour on :attribute must be in HH:MM format (24-hour).',
+        'group' => 'The closing time on :attribute must be greater than opening time.',
+        'shift' => 'The working hours of the second shift on :attribute must be greater than the previous shift.',
+    ],
 
     /*
     |--------------------------------------------------------------------------

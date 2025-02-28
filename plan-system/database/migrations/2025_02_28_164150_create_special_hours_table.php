@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('working_hours', function (Blueprint $table) {
+        Schema::create('special_hours', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Project::class);
-            $table->smallInteger('day_of_week')->comment('0: Sunday');
-            $table->smallInteger('shift_number')->default(1);
+            $table->date('date');
             $table->time('open_time');
             $table->time('close_time');
+            $table->boolean('open_flg')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('working_hours');
+        Schema::dropIfExists('special_hours');
     }
 };
