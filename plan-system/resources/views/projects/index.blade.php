@@ -27,6 +27,7 @@
                                     <th>{{ __('Projects') }}</th>
                                     <th class="text-center">{{ __('Status') }}</th>
                                     <th class="text-center">{{ __('Last modified') }}</th>
+                                    <th>{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,6 +52,10 @@
                                             @endif
                                         </td>
                                         <td class="text-center">{{ $project->updated_at->format('m-d-Y H:i') }}</td>
+                                        <td>
+                                            <a href="{{ route('projects.edit', $project) }}"
+                                                class="btn btn-sm btn-outline-info">{{ __('View') }}</a>
+                                        </td>
                                     <tr>
                                 @endforeach
                             </tbody>

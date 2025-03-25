@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Branch;
 use App\Models\Project;
 use App\Models\User;
 use App\RolesEnum;
@@ -25,8 +26,20 @@ class CheckProject
             // TODO Check valid with user
             
             $project = Project::getByCode(session('projectCode'));
-            setPermissionsTeamId($project->id);
+            $branch = Branch::getByCode(session('branchCode'), $project?->id);
 
+            // Check valid object
+            if (!$project || !$branch) {
+                return abort(404);
+            }
+
+            // Check valid route
+            if ($request->route('businessCode') && $request->route('businessCode') !== $project->code.'@'.$branch->code) {
+                return abort(404);
+            }
+
+            setPermissionsTeamId($project->id);
+            
             return $next($request);
         }
 

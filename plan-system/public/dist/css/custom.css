@@ -1,5 +1,19 @@
-.dropify-wrapper, .dropify-wrapper .dropify-preview {
+.dropify-wrapper,
+.dropify-wrapper .dropify-preview {
     background-color: #e9ecef !important;
-    border-radius: .25rem !important;
-    border: 1px solid #e9ecef !important;    
+    border-radius: 0.25rem !important;
+    border: 1px solid #e9ecef !important;
+}
+
+.no-wrap {
+    white-space: nowrap !important;
+}
+
+.dd3-handle::before {
+    content: "\e080";
+    color: #00c292;
+    font-family: simple-line-icons;
+}
+.dd3-content:hover {
+    color: #212529;
 }

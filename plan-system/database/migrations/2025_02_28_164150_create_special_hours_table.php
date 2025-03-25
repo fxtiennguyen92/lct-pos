@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use App\Models\Project;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('special_hours', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
-            $table->date('date');
-            $table->time('open_time');
-            $table->time('close_time');
-            $table->boolean('open_flg')->default(true);
+            $table->foreignIdFor(Branch::class);
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->boolean('close_flg')->default(true);
+            $table->smallInteger('position')->default(0)->comment('Resto: 0:Whole, 1:Inside, 2:Outside');
             $table->timestamps();
         });
     }

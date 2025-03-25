@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('time_offs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
+            $table->foreignIdFor(Branch::class);
             $table->foreignIdFor(User::class);
             $table->datetime('start');
             $table->datetime('end');

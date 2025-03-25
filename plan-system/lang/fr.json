@@ -13,6 +13,10 @@
     "status.active": "Actif",
     "status.inactive": "Inactif",
 
+    "restaurant.positions.0": "Entier",
+    "restaurant.positions.1": "En salle",
+    "restaurant.positions.2": "En terrase",
+
     "dropify.messages.default": "Glissez-déposez un fichier ici ou cliquez",
     "dropify.messages.replace": "Glissez-déposez un fichier ou cliquez pour remplacer",
     "dropify.messages.remove": "Supprimer",
@@ -51,6 +55,9 @@
     "Delete": "Supprimer",
     "Confirm": "Confirmer",
     "Back": "Retourner",
+    "Add new": "Ajouter",
+    "Select": "Choisir",
+    "View": "Voir",
 
     "Updating": "Mise à jour",
 
@@ -98,6 +105,13 @@
     "Domain": "Domaine",
     "Status": "Statut",
     "Logo": "Logo",
+    "Start date": "Début",
+    "End date": "Fin",
+    "Priority": "Ordre d'affichage",
+    "Category name": "Catégory",
+    "Product name": "Prestation",
+    "Description": "Description",
+    "Position": "Lieu",
 
     "New project": "Nouveau projet",
     "Edit project": "Modifier le projet",
@@ -106,17 +120,28 @@
     "Set standard hours": "Définir des horaires standards",
     "Configure the standard hours of operation for this location": "Configurer les heures d'ouverture standard pour cette entreprise",
     "This change will automatically update the working hours of the staffs": "Ce changement mettra automatiquement à jour les horaires de travail du personnel",
+    "New category": "Catégory",
+    "New service": "Prestation",
 
     "Administration": "Administration",
     "Projects": "Projets",
+    "Project": "Projet",
+    "Stores": "Boutiques",
+    "Store": "Boutique",
     "Dashboard": "Tableau de bord",
     "Profile": "Espace personnel",
     "Settings": "Paramètres",
+    "General settings": "Paramètres généraux",
     "My business": "Mon entreprise",
     "Human resources": "RH",
     "Accounts": "Comptes",
     "Languages": "Langues",
     "Business": "Entreprise",
     "Working hours": "Horaires",
-    "Special hours": "Horaires exceptionnels"
+    "Special hours": "Horaires exceptionnels",
+    "Services": "Prestations",
+    "Categories": "Catégories",
+
+    "days": "jours",
+    "month": "mois"
 }

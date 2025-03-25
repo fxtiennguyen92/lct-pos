@@ -16,17 +16,24 @@ class WorkingHour extends Model
         ];
     }
 
-    public static function findWorkingHour($projectId, $dayOfWeek, $shiftNumber = 1)
+    public static function findWorkingHour($branchId, $dayOfWeek, $shiftNumber = null)
     {
-        return WorkingHour::where('project_id', $projectId)
+        if ($shiftNumber) {
+            return WorkingHour::where('branch_id', $branchId)
+                ->where('day_of_week', $dayOfWeek)
+                ->where('shift_number', $shiftNumber)
+                ->first();
+        }
+
+        return WorkingHour::where('branch_id', $branchId)
             ->where('day_of_week', $dayOfWeek)
-            ->where('shift_number', $shiftNumber)
-            ->first();
+            ->orderBy('shift_number')
+            ->get();
     }
 
-    public static function getWorkingHours($projectId)
+    public static function getWorkingHours($branchId)
     {
-        return WorkingHour::where('project_id', $projectId)
+        return WorkingHour::where('branch_id', $branchId)
             ->orderBy('day_of_week')
             ->orderBy('shift_number')
             ->get();

@@ -15,6 +15,11 @@
                 <i class="ti-layout-grid2"></i><span class="hide-menu">{{ __('Dashboard') }}</span></a>
         </li>
         <li>
+            <a id="schedule" class="waves-effect waves-dark" href="{{ route('schedule.index', session('projectCode')) }}"
+                aria-expanded="false">
+                <i class="icon-calender"></i><span class="hide-menu">{{ __('Schedule') }}</span></a>
+        </li>
+        <li>
             <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                 <i class="icon-people"></i>
                 <span class="hide-menu">{{ __('Human resources') }}</span>
@@ -28,15 +33,30 @@
         </li>
         <li>
             <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                <i class="icon-grid"></i>
+                <span class="hide-menu">{{ __('Services') }}</span>
+            </a>
+            <ul aria-expanded="false" class="collapse">
+                <li>
+                    <a id="categories"
+                        href="{{ route('categories.index', session('projectCode')) }}">{{ __('Categories') }}</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                 <i class="ti-settings"></i>
                 <span class="hide-menu">{{ __('Settings') }}</span>
             </a>
             <ul aria-expanded="false" class="collapse">
                 <li>
-                    <a id="working-hours" href="{{ route('working-hours.edit', session('projectCode')) }}">{{ __('Working hours') }}</a>
+                    <a id="working-hours" href="{{ route('settings.index', [session('projectCode'), session('branchCode')]) }}">{{ __('General settings') }}</a>
                 </li>
                 <li>
-                    <a id="special-hours" href="{{ route('special-hours.index', session('projectCode')) }}">{{ __('Special hours') }}</a>
+                    <a id="working-hours" href="{{ route('working-hours.edit', [session('projectCode'), session('branchCode')]) }}">{{ __('Working hours') }}</a>
+                </li>
+                <li>
+                    <a id="special-hours" href="{{ route('special-hours.index', [session('projectCode'), session('branchCode')]) }}">{{ __('Special hours') }}</a>
                 </li>
             </ul>
         </li>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use App\Models\Project;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Project::class);
+            $table->foreignIdFor(Branch::class);
             $table->smallInteger('day_of_week')->comment('0: Sunday');
             $table->smallInteger('shift_number')->default(1);
             $table->time('open_time');

@@ -1,0 +1,62 @@
+/* Custom icheck */
+.icheck-list {
+    padding-right: 0px;
+    padding-top: 0px;
+}
+.iradio_line {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 13px;
+    font-weight: 500;
+}
+.icheck-list li {
+    width: 70px;
+    text-align: center;
+}
+.icheckbox_line,
+.iradio_line {
+    padding: 15px;
+}
+
+.icheckbox_line.checked,
+.iradio_line.checked,
+.icheckbox_line.checked.hover,
+.iradio_line.checked.hover {
+    background: #000;
+    color: #fff;
+}
+.icheckbox_line.hover,
+.iradio_line.hover {
+    background: #fff;
+}
+.icheckbox_line.disabled,
+.iradio_line.disabled {
+    background: #e3e3e3;
+    cursor: default;
+    border-color: #e3e3e3;
+    color: #818181;
+}
+.icheckbox_line.checked .icheck_line-icon,
+.iradio_line.checked .icheck_line-icon {
+    display: block;
+}
+
+.icheckbox_line .icheck_line-icon,
+.iradio_line .icheck_line-icon,
+.icheckbox_line.disabled .icheck_line-icon,
+.iradio_line.disabled .icheck_line-icon,
+.icheckbox_line.checked .icheck_line-icon,
+.iradio_line.checked .icheck_line-icon {
+    display: none;
+}
+
+.reservation-container {
+    padding: 1.2rem;
+}
+.slot-container {
+    border-top: 1px solid #e3e3e3;
+    padding: 1.5rem 0;
+}

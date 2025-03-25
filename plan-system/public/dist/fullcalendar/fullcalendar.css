@@ -1,0 +1,36 @@
+:root {
+    --fc-neutral-bg-color: #e9ecef;
+}
+
+.fc-toolbar .h2, .fc-toolbar h2 {
+    font-size: 1.2em !important;
+    font-weight: 500;
+    line-height: 30px;
+    text-transform: capitalize !important;
+}
+
+@media (max-width: 375px) {
+    .fc-toolbar .h2, .fc-toolbar h2 {
+        font-size: 0.8em !important;
+    }
+}
+
+.fc-toolbar-title {
+    white-space: nowrap;
+}
+
+.fc .fc-button {
+    padding: 0.2em 0.4em;
+    font-size: 0.8em;
+}
+
+.fc-list-day-text, .fc-list-day-side-text {
+    color: #212529;
+    text-transform: capitalize;
+}
+
+.fc-event {
+    background: #fff !important;
+    color: #212529 !important;
+    text-align: left !important;
+}

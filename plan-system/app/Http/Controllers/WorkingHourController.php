@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Branch;
 use App\Models\Project;
+use App\Models\SpecialHour;
 use App\Models\WorkingHour;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
 
 class WorkingHourController extends Controller
 {
-    public function edit(string $projectCode)
+    
+    public function edit(string $projectCode, string $branchCode)
     {
-        $project = Project::getByCode($projectCode);
-        $workingHours = WorkingHour::getWorkingHours($project->id);
-        
+        $project = Project::getByCode(session('projectCode'));
+        $branch = Branch::getByCode($branchCode, $project?->id);
+
+        $workingHours = WorkingHour::getWorkingHours($branch->id);
+
         return view('business.working-hours.edit', compact('workingHours'));
     }
 
-    public function update(Request $request, string $projectCode)
+    public function update(Request $request, string $projectCode, string $branchCode)
     {
         // Validation
         $isSuccess = true;
@@ -69,19 +73,21 @@ class WorkingHourController extends Controller
         // Error
         if (!$isSuccess) {
             return response()->json([
-                'status' => $isSuccess,
+                'success' => $isSuccess,
                 'error' => $error,
             ]);
         }
 
         // Update
-        $project = Project::getByCode($projectCode);
+        $project = Project::getByCode(session('projectCode'));
+        $branch = Branch::getByCode($branchCode, $project?->id);
+
         for ($i = 1; $i < 8; $i++) {
             if ($request->has('open_day_' . $i)) {
                 // Update or create first shift
                 WorkingHour::updateOrCreate(
                     [
-                        'project_id' => $project->id,
+                        'branch_id' => $branch->id,
                         'day_of_week' => $i,
                         'shift_number' => 1
                     ],
@@ -95,7 +101,7 @@ class WorkingHourController extends Controller
                 if ($request->get('open_time_2_day_' . $i)) {
                     WorkingHour::updateOrCreate(
                         [
-                            'project_id' => $project->id,
+                            'branch_id' => $branch->id,
                             'day_of_week' => $i,
                             'shift_number' => 2
                         ],
@@ -106,14 +112,14 @@ class WorkingHourController extends Controller
                     );
                 } else {
                     // Delete if exist
-                    $workingHour = WorkingHour::findWorkingHour($project->id, $i, 2);
+                    $workingHour = WorkingHour::findWorkingHour($branch->id, $i, 2);
                     if ($workingHour) {
                         $workingHour->delete();
                     }
                 }
             } else {
                 // Delete if exist
-                $workingHour = WorkingHour::findWorkingHour($project->id, $i, 1);
+                $workingHour = WorkingHour::findWorkingHour($branch->id, $i, 1);
                 if ($workingHour) {
                     $workingHour->delete();
                 }
@@ -121,7 +127,7 @@ class WorkingHourController extends Controller
         }
 
         return response()->json([
-            'status' => true,
+            'success' => true,
         ]);
     }
 
@@ -138,8 +144,8 @@ class WorkingHourController extends Controller
     function checkGroupTime($firstTime, $secondTime)
     {
         try {
-            $first = Carbon::createFromFormat('H:i', $firstTime);;
-            $end = Carbon::createFromFormat('H:i', $secondTime);;
+            $first = Carbon::createFromFormat('H:i', $firstTime);
+            $end = Carbon::createFromFormat('H:i', $secondTime);
 
             if ($first < $end) {
                 return true;

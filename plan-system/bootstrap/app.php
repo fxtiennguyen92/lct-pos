@@ -13,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            'external/*'
+        ]);
+
 
         $middleware->alias([
             'super-admin' => CheckSuperAdmin::class,
@@ -22,7 +26,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web([
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\CheckUserActive::class,
-            
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

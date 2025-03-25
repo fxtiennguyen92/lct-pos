@@ -6,6 +6,7 @@ use App\Models\User;
 use App\RolesEnum;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->enforceSecureUrls();
     }
 
     /**
@@ -27,5 +28,12 @@ class AppServiceProvider extends ServiceProvider
         // View pagination
         Paginator::defaultView('vendor.pagination.custom');
         Paginator::defaultSimpleView('vendor.pagination.custom');
+    }
+
+    private function enforceSecureUrls(): void
+    {
+        if (!$this->app->environment('local')) {
+            URL::forceScheme('https');
+        }
     }
 }

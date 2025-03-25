@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +14,21 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Project::class)->nullable();
+            $table->string('secret_key', 40);
+
             $table->string('code')->unique();
             $table->string('name')->unique();
             $table->string('logo_path', 2048)->nullable();
-            $table->string('skin', 100)->nullable();
+            
             $table->string('domain', 100)->nullable();
             $table->smallInteger('status')->default(0);
+            $table->boolean('has_branches')->default(false);
+
+            $table->string('skin', 100)->nullable()->comment('light, dark, ...');
+            $table->string('primary_color', 30)->nullable();
+            $table->string('secondary_color', 30)->nullable();
+
             $table->timestamps();
         });
 

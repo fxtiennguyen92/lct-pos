@@ -4,7 +4,7 @@
     <!-- Bread crumb and right sidebar toggle -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">{{ __('Working hours') }}</h4>
+            <h4 class="text-themecolor">{{ session('projectName') }}</h4>
         </div>
         <div class="col-md-7 align-self-center text-end">
             <div class="d-flex justify-content-end align-items-center">
@@ -18,7 +18,8 @@
     </div>
 
     <!-- Page content -->
-    <form id="submitForm" method="post" action="{{ route('working-hours.update', session('projectCode')) }}">
+    <form id="submitForm" method="post"
+        action="{{ route('working-hours.update', [session('projectCode'), session('branchCode')]) }}">
         @csrf
         <div class="row">
             <div class="col-lg-8 col-md-6">
@@ -65,11 +66,13 @@
                                         @unless ($shift1) style="display: none;" @endunless>
                                         <div class="input-group mb-2">
                                             <input type="text" class="clockpicker form-control text-center"
-                                                placeholder="00:00" name="open_time_1_day_{{ $day }}"
+                                                data-autoclose="true" placeholder="00:00"
+                                                name="open_time_1_day_{{ $day }}"
                                                 value="{{ $shift1?->open_time->format('H:i') }}">
                                             <span class="input-group-text">{{ __('-') }}</span>
                                             <input type="text" class="clockpicker form-control text-center"
-                                                placeholder="00:00" name="close_time_1_day_{{ $day }}"
+                                                data-autoclose="true" placeholder="00:00"
+                                                name="close_time_1_day_{{ $day }}"
                                                 value="{{ $shift1?->close_time->format('H:i') }}">
 
                                             <div class="col-form-label ms-2">
@@ -83,11 +86,13 @@
                                         <div id="second-shift-{{ $day }}" class="input-group mb-2"
                                             @if (!$shift2) style="display: none;" @endif>
                                             <input type="text" class="clockpicker form-control text-center"
-                                                placeholder="00:00" name="open_time_2_day_{{ $day }}"
+                                                data-autoclose="true" placeholder="00:00"
+                                                name="open_time_2_day_{{ $day }}"
                                                 value="{{ $shift2?->open_time->format('H:i') }}">
                                             <span class="input-group-text">{{ __('-') }}</span>
                                             <input type="text" class="clockpicker form-control text-center"
-                                                placeholder="00:00" name="close_time_2_day_{{ $day }}"
+                                                data-autoclose="true" placeholder="00:00"
+                                                name="close_time_2_day_{{ $day }}"
                                                 value="{{ $shift2?->close_time->format('H:i') }}">
 
                                             <div class="col-form-label ms-2">
@@ -128,9 +133,7 @@
 @push('js')
     <script src="assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <script>
-        $('.clockpicker').clockpicker({
-            donetext: @json(__('Select')),
-        });
+        $('.clockpicker').clockpicker();
 
         $('.day-checkbox').change(function() {
             var day = $(this).data("day");
@@ -162,8 +165,6 @@
             event.preventDefault();
             $(this).prop('disabled', true);
 
-            // $('#submitForm').submit();
-
             Swal.fire({
                 title: @json(__('Update')),
                 text: @json(__('This change will automatically update the working hours of the staffs')),
@@ -188,7 +189,7 @@
                         data: $('#submitForm').serialize(),
                         dataType: 'json',
                         success: function(response) {
-                            if (response.status) {
+                            if (response.success) {
                                 $('#errorMessage').html('');
                                 $('#errorMessage').hide();
 
@@ -217,8 +218,8 @@
                             });
                         },
                         complete: function(data) {
-                                Swal.close();
-                                $('.btn-update').prop('disabled', false);
+                            Swal.close();
+                            $('.btn-update').prop('disabled', false);
                         }
                     });
                 } else {

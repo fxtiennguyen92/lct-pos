@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Branch;
 use App\Models\Language;
 use App\Models\Project;
 use App\Models\User;
@@ -45,11 +46,12 @@ class DatabaseSeeder extends Seeder
 
         // Demo
         $project = Project::create([
-            'code' => 'demoNailSalon',
-            'name' => 'Nail Salon Demo',
-            'domain' => 'nail-salon',
+            'code' => 'demoResto',
+            'name' => 'Resto Demo',
+            'domain' => 'restaurant',
             'status' => 1
         ]);
+
         $director = User::create([
             'name' => 'Director',
             'email' => 'director@demo.com',

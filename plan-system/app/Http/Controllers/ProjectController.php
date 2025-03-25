@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DomainsEnum;
+use App\Models\Branch;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -59,21 +60,52 @@ class ProjectController extends Controller
      * Display the specified resource.
      */
     public function show(Request $request, string $projectCode)
-    {   
+    {
         $project = Project::getByCode($projectCode);
 
         if (!$project) {
             return abort(404);
         }
 
+        if (!$project->has_branches) {
+            $branch = $project->branches()->first();
+
+            return redirect()->route('projects.branches.show', [$project->code, $branch->code]);
+        }
+
         // TODO: Check adapt with user
-        
 
         // Store selected project code
-        $request->session()->put('projectCode', $projectCode);
+        $request->session()->put('projectCode', $project->code);
+        $request->session()->put('projectName', $project->name);
 
         return view('business.dashboard', compact('project'));
     }
+
+    /**
+     * Display the specified branch.
+     */
+    public function branch(Request $request, string $projectCode, string $branchCode)
+    {
+        $project = Project::getByCode($projectCode);
+        $branch = Branch::getByCode($branchCode, $project?->id);
+
+        if (!$project || !$branch) {
+            return abort(404);
+        }
+
+        // TODO: Check adapt with user
+
+        // Store selected project code
+        $request->session()->put('projectCode', $project->code);
+        $request->session()->put('branchCode', $branch->code);
+
+        $request->session()->put('projectName', $project->name.' - '.$branch->name);
+
+        return view('business.branch-dashboard', compact('branch'));
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.
