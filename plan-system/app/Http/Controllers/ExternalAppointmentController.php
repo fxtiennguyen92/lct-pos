@@ -72,6 +72,7 @@ class ExternalAppointmentController extends Controller
         foreach ($dateRange as $date) {
             $dayOfWeek = $date->dayOfWeek;
             $formattedDay = $date->format('Y-m-d');
+
             $allSlots[$formattedDay] = []; // Store array of all slots
 
             // General schedule
@@ -105,9 +106,8 @@ class ExternalAppointmentController extends Controller
 
                     // Check is past
                     if ($datetime < now()) {
-                        array_push($allSlots[$formattedDay], [$time => false]);
+                        // array_push($allSlots[$formattedDay], [$time => false]);
                         unset($availableSlots[$formattedDay][$key]);
-
                         continue;
                     }
 
@@ -143,7 +143,7 @@ class ExternalAppointmentController extends Controller
         $project = Project::getByCode($projectCode);
         $branch = Branch::getByCode($branchCode, $project?->id);
 
-        dd($request->all());
+        
     }
 
 

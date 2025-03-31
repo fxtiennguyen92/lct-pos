@@ -13,7 +13,7 @@
     font-weight: 500;
 }
 .icheck-list li {
-    width: 70px;
+    width: 68px;
     text-align: center;
 }
 .icheckbox_line,
@@ -54,9 +54,16 @@
 }
 
 .reservation-container {
-    padding: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 .slot-container {
     border-top: 1px solid #e3e3e3;
     padding: 1.5rem 0;
+}
+.reservation-info {
+    background-color: rgb(241, 243, 244);
+    color: rgb(60, 64, 67);
+    padding: 1.2rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
 }
