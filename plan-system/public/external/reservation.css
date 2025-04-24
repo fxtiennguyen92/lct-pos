@@ -1,69 +1,159 @@
-/* Custom icheck */
+:root {
+    --black: #28282b;
+    --grey: #e3e3e3;
+    --text-grey: #585858;
+    --text: #888;
+}
+
+.offcanvas-header {
+    background-color: var(--grey);
+    color: var(--black);
+}
+.offcanvas-title {
+    color: var(--text-grey);
+}
+
+.btn-black {
+    background-color: var(--black);
+    color: #fff;
+}
+.btn-black:disabled {
+    background-color: var(--grey);
+}
+
+.btn-outline-black,
+.dtp-btn-cancel {
+    border-color: var(--black) !important;
+    background-color: #fff !important;
+    color: var(--black) !important;
+}
+
+.form-label {
+    color: var(--black);
+}
+.form-control,
+.form-select {
+    color: var(--black);
+    border-color: var(--grey);
+}
+.form-select {
+    height: 38px;
+}
+
 .icheck-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     padding-right: 0px;
     padding-top: 0px;
+    padding-left: 0px;
+    list-style: none;
 }
-.iradio_line {
+.icheck-list li {
+    text-align: center;
+    width: 68px;
+    padding-bottom: 5px;
+}
+@media (min-width: 375px) {
+    .icheck-list li {
+        width: 63px;
+    }
+}
+
+@media (min-width: 425px) {
+    .icheck-list li {
+        width: 68px;
+    }
+}
+
+@media (max-width: 320px) {
+    .icheck-list li {
+        width: 67px;
+    }
+}
+
+.slot-button {
+    position: relative;
+}
+
+.slot-button input[type="radio"] {
+    display: none;
+}
+
+.slot-button label {
+    display: inline-block;
     background: #fff;
-    color: #000;
-    border: 1px solid #000;
+    color: var(--black);
+    border: 1px solid var(--black);
     border-radius: 3px;
     font-size: 13px;
     line-height: 13px;
     font-weight: 500;
-}
-.icheck-list li {
-    width: 68px;
-    text-align: center;
-}
-.icheckbox_line,
-.iradio_line {
-    padding: 15px;
+    padding: .8rem 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
-.icheckbox_line.checked,
-.iradio_line.checked,
-.icheckbox_line.checked.hover,
-.iradio_line.checked.hover {
-    background: #000;
+.slot-button input[type="radio"]:checked + label {
+    background-color: var(--black);
     color: #fff;
 }
-.icheckbox_line.hover,
-.iradio_line.hover {
-    background: #fff;
-}
-.icheckbox_line.disabled,
-.iradio_line.disabled {
-    background: #e3e3e3;
-    cursor: default;
-    border-color: #e3e3e3;
-    color: #818181;
-}
-.icheckbox_line.checked .icheck_line-icon,
-.iradio_line.checked .icheck_line-icon {
-    display: block;
-}
 
-.icheckbox_line .icheck_line-icon,
-.iradio_line .icheck_line-icon,
-.icheckbox_line.disabled .icheck_line-icon,
-.iradio_line.disabled .icheck_line-icon,
-.icheckbox_line.checked .icheck_line-icon,
-.iradio_line.checked .icheck_line-icon {
-    display: none;
+.slot-button.disabled {
+    background: var(--grey);
+    cursor: default;
+    border-color: var(--grey);
+    color: #818181;
+} 
+
+/* Calendar */
+.dtp > .dtp-content > .dtp-date-view > header.dtp-header {
+    background-color: #000;
+}
+.dtp-actual-day,
+.dtp table.dtp-picker-days tr > th {
+    text-transform: capitalize;
+}
+.dtp div.dtp-date,
+.dtp div.dtp-time {
+    background-color: var(--black);
+}
+.dtp table.dtp-picker-days tr > td > a,
+.dtp .dtp-picker-time > a {
+    color: var(--black);
+}
+.dtp table.dtp-picker-days tr > td > a.selected {
+    background-color: var(--black);
+}
+.btn-success {
+    background-color: var(--black);
+    color: #fff;
+    border-color: var(--black);
 }
 
 .reservation-container {
-  margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
 }
 .slot-container {
-    border-top: 1px solid #e3e3e3;
-    padding: 1.5rem 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
 }
 .reservation-info {
-    background-color: rgb(241, 243, 244);
-    color: rgb(60, 64, 67);
+    background-color: var(--grey);
+    color: var(--text-grey);
     padding: 1.2rem;
     border-radius: 3px;
     font-size: 0.8rem;
+}
+
+.form-label {
+    font-size: 0.75rem !important;
+}
+.alert-reservation {
+    font-size: 0.8rem;
+}
+.invalid-feedback {
+    margin-top: 0;
 }

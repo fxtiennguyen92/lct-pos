@@ -5,14 +5,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BranchSettingController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ExternalAppointmentController;
+use App\Http\Controllers\ExternalRestaurantReservationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProjectAccountController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RestaurantReservationController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialHourController;
 use App\Http\Controllers\WorkingHourController;
-use App\Models\BranchSetting;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,10 +45,9 @@ Route::get('/change-locale/{locale}', [LanguageController::class, 'change'])->na
 Route::get('/reservation', function () {
     return view('reservation');
 })->name('reservation');
-Route::get('external/{projectCode}/{branchCode}/init', [ExternalAppointmentController::class, 'init']);
-Route::get('external/{projectCode}/{branchCode}/calendar', [ExternalAppointmentController::class, 'show']);
-Route::post('external/{projectCode}/{branchCode}/reserve', [ExternalAppointmentController::class, 'reserve']);
-
+Route::get('external/{projectCode}/{branchCode}/init', [ExternalRestaurantReservationController::class, 'init']);
+Route::get('external/{projectCode}/{branchCode}/calendar', [ExternalRestaurantReservationController::class, 'show']);
+Route::post('external/{projectCode}/{branchCode}/reserve', [ExternalRestaurantReservationController::class, 'reserve']);
 
 
 // Super Admin
@@ -73,10 +72,12 @@ Route::middleware('auth')->group(function () {
         Route::get('business/{projectCode}/branches/{branchCode}/working-hours', [WorkingHourController::class, 'edit'])->name('working-hours.edit');
         Route::post('business/{projectCode}/branches/{branchCode}/working-hours', [WorkingHourController::class, 'update'])->name('working-hours.update');
 
-        
-
         // Special hours
         Route::resource('business/{projectCode}/branches/{branchCode}/special-hours', SpecialHourController::class)->except(['show', 'create', 'edit', 'update']);
+
+        // Restaurant reservation
+        Route::get('business/{projectCode}/branches/{branchCode}/reservation/pending', [RestaurantReservationController::class, 'pendingList'])->name('restaurant.reservation.index.pending');
+        Route::get('business/{projectCode}/branches/{branchCode}/reservation/accepted', [RestaurantReservationController::class, 'acceptedList'])->name('restaurant.reservation.index.accepted');
 
         // Apointments
         Route::resource('business/{projectCode}/branches/{branchCode}/appointments', AppointmentController::class)->except(['destroy']);

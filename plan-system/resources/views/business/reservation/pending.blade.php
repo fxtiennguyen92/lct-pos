@@ -9,9 +9,8 @@
         <div class="col-md-7 align-self-center text-end">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb justify-content-end">
-                    <li class="breadcrumb-item">{{ __('My business') }}</li>
-                    <li class="breadcrumb-item">{{ __('Settings') }}</li>
-                    <li class="breadcrumb-item active">{{ __('Special hours') }}</li>
+                    <li class="breadcrumb-item">{{ __('Reservation') }}</li>
+                    <li class="breadcrumb-item active">{{ __('Pending') }}</li>
                 </ol>
             </div>
         </div>
@@ -20,12 +19,7 @@
     <!-- Page content -->
     <div class="row">
         <div class="col-12">
-            <div>
-                <a class="btn btn-info text-white mb-4" data-bs-toggle="modal" data-bs-target="#new-modal">
-                    <i class="ti-plus"></i> {{ __('Add new') }}</a>
-            </div>
-
-            @if (sizeof($specialHours) > 0)
+            @if (sizeof($reservations) > 0)
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-uppercase m-t-10">{{ __('Special hours') }}</h5>

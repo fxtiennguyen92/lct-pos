@@ -17,3 +17,7 @@
 .dd3-content:hover {
     color: #212529;
 }
+
+.sidebar-nav ul li a {
+    font-size: 0.85rem;
+}

@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Branch;
 use App\Models\Project;
+use App\Models\RestaurantReservation;
 use App\Models\SpecialHour;
 use App\Models\WorkingHour;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use DateTime;
+use Exception;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
-class ExternalAppointmentController extends Controller
+class ExternalRestaurantReservationController extends Controller
 {
     public function init(Request $request, string $projectCode, string $branchCode)
     {
@@ -143,7 +146,72 @@ class ExternalAppointmentController extends Controller
         $project = Project::getByCode($projectCode);
         $branch = Branch::getByCode($branchCode, $project?->id);
 
+        $validator = Validator::make($request->all(), [
+            'client_first_name' => 'nullable|string|max:100',
+            'client_last_name' => 'required|string|max:100',
+            'client_phone' => 'required|phone:FR,INTERNATIONAL',
+            'client_email' => 'required|email',
+            'client_notes' => 'nullable|string|max:300',
+        ], [
+            'client_last_name.required' => 'Veuillez entrer votre nom correct.',
+            'client_phone.required' => 'Veuillez entrer votre numéro de téléphone correct.',
+            'client_email.required' => 'Veuillez entrer votre email correct.',
+
+            'client_first_name.string' => 'Veuillez entrer votre nom correct.',
+            'client_last_name.string' => 'Veuillez entrer votre nom correct.',
+            'client_first_name.max' => 'Veuillez entrer votre nom correct.',
+            'client_last_name.max' => 'Veuillez entrer votre nom correct.',
+
+            'client_phone.phone' => "Le numéro de téléphone saisi n'est pas valide.",
+            'client_email.email' => "L'e-mail saisi n'est pas valide.",
+
+            'client_notes.string' => "Votre demande n'est pas adaptée.",
+            'client_notes.max' => "Votre demande n'est pas adaptée.",
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => 'false',
+                'error' => 'info',
+                'errors' => $validator->errors(),
+                'message' => $validator->errors()->first(),
+            ], 422);
+        }
+
+        // Check available slot
+        if (!$this->checkAvailableSlot($request->date, $request->slot, $request->party)) {
+
+            return response()->json([
+                'success' => false,
+                'error' => 'date',
+                'message' => "Nous sommes désolés, le créneau que vous avez sélectionné n'est malheureusement plus disponible. Nous vous invitons à choisir un autre horaire."
+            ], 422);
+        }
         
+        // Storage appointment
+        $bookingTime = Carbon::createFromFormat('d-m-Y H:i', $request->date.' '.$request->slot);
+        $reservation = RestaurantReservation::create([
+            'branch_id' => $branch->id,
+            'client_party' => is_int($request->client_party) ? $request->client_party : 1,
+            'client_email' => $request->client_email,
+            'client_phone' => str_replace(' ', '', $request->client_phone),
+            'client_first_name' => $request->client_first_name,
+            'client_last_name' => $request->client_last_name,
+            'client_notes' => $request->client_notes,
+
+            'outside_flg' => $request->position == '2',
+            'status' => 0,
+
+            'booked_for' => $bookingTime,
+            'exp_end_at' => $branch->setting->restaurant_meal_duration == null ? null : $bookingTime->addMinutes(15),
+
+            'accepted_at' => $branch->setting->confirm_reservation_flg ? null : now(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Abc"
+        ]);
     }
 
 
@@ -170,5 +238,15 @@ class ExternalAppointmentController extends Controller
         }
 
         return $timeSlots;
+    }
+
+    function checkAvailableSlot($date, $hour, $party) {
+        try {
+            $chosenDateTime = Carbon::createFromFormat('d-m-Y H:i', $date.' '.$hour);
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }

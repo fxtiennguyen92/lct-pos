@@ -98,7 +98,9 @@ class ProjectController extends Controller
 
         // Store selected project code
         $request->session()->put('projectCode', $project->code);
+        $request->session()->put('projectDomain', $project->domain);
         $request->session()->put('branchCode', $branch->code);
+        
 
         $request->session()->put('projectName', $project->name.' - '.$branch->name);
 
